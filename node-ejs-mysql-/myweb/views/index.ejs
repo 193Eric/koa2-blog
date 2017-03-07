@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+    <ul class="nav-ul">
+      <% for(var i in nav){%>
+            <li><a><%= nav[i].name %></a></li>
+    <%} %>
+    </ul>
+  </nav>
+  </body>
+</html>
