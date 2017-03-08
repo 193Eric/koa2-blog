@@ -1,0 +1,51 @@
+.dialog-box{
+    width: 300px;
+    left: 0;
+    right: 0;
+    display: table;
+    margin: auto;
+    height: 180px;
+    background-color: #fff;
+    position: fixed;
+    z-index: 1001;
+    box-shadow: 2px 2px 8px rgba(0, 0,0, .3),-2px -2px 8px rgba(0, 0,0, .3);
+}
+.dialog-box .content{
+    width: 100%;
+    height: 130px;
+    line-height: 130px;
+    color: #808080;
+    text-align: center;
+    font-size: 16px;
+}
+.dialog-box .cancel, .dialog-box .right {
+    text-align: center;
+    color: #000;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    width: 50%;
+}
+.hide-page{
+    z-index: 1000;
+    background-color: #000;
+    opacity: .7;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+.dialog-box .cancel {
+    float: left;
+    border-right: 1px solid #eee;
+    box-sizing: border-box;
+}
+.cancel:active{
+    color: #2a89c9;
+}
+.right:active{
+    color: #2a89c9;
+}
+.dialog-box .right{
+    float: right;
+}
