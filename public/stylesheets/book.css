@@ -1,0 +1,197 @@
+body,html{
+    margin: 0 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
+    background-color: #fefefe;
+    font-weight: 400;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+body{
+    margin: 0;
+}
+header,section,footer{
+    width: 100%;
+}
+.back_img{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 300px;
+}
+.back_img>img{
+    width: 100%;
+    height: 100%;
+}
+header{
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    display: block;
+    background-repeat:no-repeat;
+    background-size: contain;
+    opacity: .9;
+
+}
+h1,h2,h3,h4,h5{
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Hiragino Sans GB,Microsoft Yahei,Microsoft Jhenghei,sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: inherit;
+    text-rendering: optimizeLegibility;
+    margin:0;
+    padding: 0;
+    line-height: 1.3;
+}
+header>div{
+     float: right;
+     margin-right: 25%;
+ }
+header h1{
+    font-size: 20px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 20%;
+    color: #fff;
+}
+header>div a{
+    color: #fff;
+    font-size: 14px;
+    margin: 35px 10px 0px 10px;
+    float: left;
+    position: relative;
+
+}
+.line{
+    width: 0;
+    height: 2px;
+    background-color: #da4f49;
+    position: absolute;
+    bottom:-2px;
+    left:-4px;
+    transition: all .2s;
+}
+header>div a:hover .line{
+    width: 65px;
+}
+header>div a:hover{
+    color: orangered;
+}
+section{
+    width: 100%;
+}
+.case-header{
+    background: #fff;
+    box-shadow: 0 3px 24px 0 rgba(0,0,0,.05);
+    text-align: center;
+
+}
+.case-header h2{
+    padding: 25px 0;
+    margin-top: 20px;
+        color: #14b1d1;
+}
+.case,.case-header{
+    width: 60%;
+    margin: 0 auto;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.case:hover a{
+    top:-100px;
+}
+.case {
+    height: 400px;
+    background: #fefefe;
+    border: 1px solid rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-radius: 3px;
+    transition: all .3s;
+}
+hr{
+    max-width: 75rem;
+    height: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #ebebeb;
+    border-left: 0;
+    margin: 1.25rem auto;
+    clear: both;
+}
+.case img{
+    width: 100%;
+    height: 260px;
+}
+.case a{
+    display: block;
+    margin: 0 auto;
+    width: 450px;
+    height: 200px;
+    border: 1px solid rgba(0,0,0,.05);
+    background: hsla(0,0%,100%,.95);
+    box-shadow: 0 3px 20px 0 rgba(0,0,0,.05);
+    position: relative;
+    top:-80px;
+    transition: all .3s;
+}
+.case a p{
+    width: 380px;
+    height: 110px;
+    font-size: 18px;
+    line-height: 30px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    color: #616161;
+    margin-top: 30px;
+}
+.case span{
+    color: #000;
+    margin-top: 15px;
+    line-height: 30px;
+    font-size: 16px;
+}
+.case a span:nth-child(3){
+    float: left;
+    margin-left: 30px;
+}
+.case a span:nth-child(4){
+    float: right;
+    margin-right: 40px;
+}
+.case:hover{
+    box-shadow: 0 5px 35px rgba(0,0,0,.1);
+}
+.case span:nth-child(4){
+    color: #14b1d1;
+}
+.case:hover a{
+    animation: shake-2 .5s ;
+}
+.case-list{
+    width: 100%;
+    display: flex;
+    border-top:1px solid #e0e0e0;
+}
+.case-item{
+    flex: 1;
+    height: 50px;
+    line-height: 50px;
+    transition: all .2s ease;
+}
+.case-item:hover{
+    color: #14b1d1;
+    background-image: linear-gradient(-163deg,#6fcfd3 4%,#48b8d0);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    color: #fcfcfc;
+    box-shadow: 5px 5px 15px rgba(0,0,0,.2);
+}
+hr{
+    width: 300px;
+    margin: 0 auto;
+    height: 1px;
+
+}
