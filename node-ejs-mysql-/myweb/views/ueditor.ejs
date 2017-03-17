@@ -2,23 +2,54 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>完整demo</title>
+    <title>后台管理系统</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/edit.css'/>
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"> </script>
-    <style type="text/css">
-        div{
-            width:100%;
-        }
-    </style>
 </head>
 <body>
 <div>
-    <h1>完整demo</h1>
-    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+    <header>
+      <section class='black'></section>
+      <nav>
+        <div>
+          <div class='ico'></div>
+          <ul class="nav-ul">
+            <li class="nav-select">
+              <a href="/">文章管理</a>
+            </li>
+            <li>
+              <a href="./book?title=Html5&name=null">留言版管理</a>
+            </li>
+            <li>
+              <a href="/category/end">自我介绍管理</a>
+            </li>
+            <li>
+              <a href="/category/trivial">项目作品管理</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <section>
+        <div class='left-title'>
+            <div class='title-item'>Web前端</div>
+            <div class='title-item'>Node</div>
+            <div class='title-item'>UI</div>
+            <div class='title-item'>随笔</div>
+        </div>
+    </section>
+    <section>
+        <div class='title-content'>
+            <div class='content-item'></div>
+        </div>
+    </section>
+    <!--<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>-->
 </div>
-<div id="btns">
+<!--<div id="btns">
     <div>
         <button onclick="getAllHtml()">获得整个html的内容</button>
         <button onclick="getContent()">获得内容</button>
@@ -47,7 +78,7 @@
     创建编辑器</button>
     <button onclick="deleteEditor()">
     删除编辑器</button>
-</div>
+</div>-->
 
 <script type="text/javascript">
 

@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title><%= title %></title>
+    <title></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <nav>
-    <ul class="nav-ul">
-      <% for(var i in nav){%>
-            <li><a><%= nav[i].name %></a></li>
-    <%} %>
-    </ul>
-  </nav>
+    <header>
+      <section class='black'></section>
+      <nav>
+        <div>
+          <div class='ico'></div>
+          <ul class="nav-ul">
+            <li class="nav-select">
+              <a href="/">首页</a>
+            </li>
+            <li>
+              <a href="./book?title=Html5&name=null">Web前端</a>
+            </li>
+            <li>
+              <a href="/category/end">UI</a>
+            </li>
+            <li>
+              <a href="/category/trivial">项目作品</a>
+            </li>
+            <li>
+              <a href="/category/life">Life</a>
+            </li>
+            <li>
+              <a href="#">About Me</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
   </body>
 </html>

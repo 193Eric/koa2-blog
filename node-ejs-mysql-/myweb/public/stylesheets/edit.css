@@ -1,0 +1,37 @@
+body{
+        background-image:url(./../images/content.jpg);
+                background-size: cover;
+}
+.left-title{
+        width: 140px;
+        background: #fff;
+        border-radius: 5px;
+        position: absolute;
+        top: 200px;
+        left: 0;
+        border: 3px solid #00A6C6;
+}
+.title-item{
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.title-item:hover{
+    background: #00A6C6;
+    color: #fff;
+}
+.title-content{
+       width: 1100px;
+       margin-top: 50px;
+       margin-left: 230px;
+       min-height:600px;
+}
+.content-item{
+    height: 130px;
+    border: 3px solid #00A6C6;
+    border-radius: 8px;
+    background: #fff;
+    width: 900px;;
+    float: left;
+    margin: 20px 100px;
+}
