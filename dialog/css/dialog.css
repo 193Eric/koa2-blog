@@ -1,10 +1,10 @@
 .dialog-box{
-    width: 300px;
+    width: 250px;
     left: 0;
     right: 0;
     display: table;
     margin: auto;
-    height: 180px;
+    height: 150px;
     background-color: #fff;
     position: fixed;
     z-index: 1001;
@@ -12,7 +12,7 @@
 }
 .dialog-box .content{
     width: 100%;
-    height: 130px;
+    height: 110px;
     line-height: 130px;
     color: #808080;
     text-align: center;
@@ -21,8 +21,8 @@
 .dialog-box .cancel, .dialog-box .right {
     text-align: center;
     color: #000;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     font-size: 16px;
     width: 50%;
 }
@@ -44,8 +44,26 @@
     color: #2a89c9;
 }
 .right:active{
-    color: #2a89c9;
-}
+     color: #2a89c9;
+ }
 .dialog-box .right{
     float: right;
+}
+.fail-content{
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    padding: 0 10px;
+    display: table-cell;
+    word-break: break-all;
+    color: #808080;
+}
+.fail-png{
+    background: url(./../images/fail.png) no-repeat center;
+    display: block;
+    height: 35px;
+    width: 35px;
+    margin: 0 auto;
+    background-size: 100%;
+    margin-bottom: 5px;
 }

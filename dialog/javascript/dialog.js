@@ -2,10 +2,8 @@
 (function(){
     //遮慕层；
     var Dialog = {
-        confirm :function(content,fn){
-            var $html=$("<div class='dialog-box'><div class='content'></div><div class='cancel'>取消</div><div class='right'>确定</div></div>");
-            $('body').append($html);
-            this.hidePage();
+        confirm : function(content,fn){
+            this.open("<div class='content'></div><div class='cancel'>取消</div><div class='right'>确定</div>")
             var scroll = $(document).scrollTop();
             $(".dialog-box").css({"top":scroll+150+"px"});
             $(".dialog-box .content").html(content);
@@ -17,20 +15,26 @@
                 fn();
             })
         },
+        fail : function(content){
+            this.open("<div class='fail-content'><div class='fail-png'></div>"+content+"</div></div></div>");
+            setTimeout(function(){
+                Dialog.close();
+            },2000)
+        },
+        loading : function(){
+            this.open()
+        },
         hidePage : function(){
             $('body').append($("<div class='hide-page'></div>"));
+        },
+        open : function(html){
+            var $html = $("<div class='dialog-box'>"+html+"</div>");
+            $('body').append($html);
+            this.hidePage();
         },
         close : function(){
             $(".dialog-box,.hide-page").remove();
         },
-        fail : function(content){
-            var $html = $("<div class='dialog-box dialog_fail'><div class='fail-content'><div class='fail-png'></div>"+content+"</div></div></div></div>");
-            $("body").append($html);
-            setTimeout(function(){
-
-            },2000)
-        }
     };
     $.extend($,{Dialog: Dialog});
-
 })();
