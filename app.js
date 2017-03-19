@@ -64,18 +64,42 @@ app.use('/ueditor/ue', ueditor(path.join(__dirname, 'public'), function (req, re
 }))
 app.use('/', routes)
 var fs = require('fs')
-app.use('/edit', function (req, res) {
-  fs.exists(__dirname + '/note', function (exit) {
-    if (exit) {
-    }else {
-      fs.mkdir(__dirname + '/note',function(err){
-        if(err){
-            console.log("文件夹创建出错");
+//判断文件夹存在;不存在则创建
+var fsLiveDir = function(name){
+    fs.exists(__dirname+name,function(_exit){
+        if(_exit){
+            console.log(name+"已存在");
+            return 0;
         }else{
-            console.log("文件夹创建成功");
+            fs.mkdirSync(__dirname + name,function(err){
+              if(err){
+                  console.log(name+"创建失败");
+              }else{
+                  console.log(name+"创建成功");
+              }
+            })
         }
-      })
-    }
-  })
+    })
+}
+var fsLiveFs = function(name){
+    fs.exists(__dirname+name,function(_exit){
+      if(_exit){
+          console.log(name+"已存在");
+          return 0;
+      }else{
+          fs.writeFile(__dirname + name,function(err){
+              if(err){
+                  console.log(name+"创建失败");
+              }else{
+                  console.log(name+"创建成功");
+              }
+          })
+      }
+    })
+}
+app.use('/edit', function (req, res) {
+  fsLiveDir("/note");
+  fsLiveDir("/note/web");
+  fsLiveFs("/note/web/web.txt");
 })
 module.exports = app
