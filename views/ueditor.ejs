@@ -4,45 +4,54 @@
 <head>
     <title>后台管理系统</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel='stylesheet' href='/stylesheets/edit.css'/>
+    <link href="stylesheets/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/font-awesome.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"> </script>
 </head>
 <body>
-<div>
-    <header>
-      <section class='black'></section>
-      <nav>
-        <div>
-          <div class='ico'></div>
-          <ul class="nav-ul">
-            <li class="nav-select">
-              <a class='a-select' href="javascript:void(0)" id='article'>文章管理</a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" id='message-board'>留言版管理</a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" id='show-my'>自我介绍管理</a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" id='product'>项目作品管理</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <section>
-        <div class='left-title'>
-            <div class='title-item item-select'>Web前端</div>
-            <div class='title-item'>Node</div>
-            <div class='title-item'>UI</div>
-            <div class='title-item'>随笔</div>
-        </div>
-    </section>
-    <section>
+<div class='content'>
+      <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+		<ul id="demo-list">
+		   <li class=""><a href="#"><i class="fa fa-home"></i>Home </a></li>
+			<li><a href="#"><i class="fa fa-glass"></i>Events </a></li>
+			<li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">
+				12 </span></li>
+			<li class="active"><a href="#" class=""><span class="ink animate-ink" style="height: 260px; width: 260px; top: -106.8px; left: 88.4px;"></span><i class="fa fa-cog"></i>Services <span class="submenu-indicator">+</span></a>
+				<ul class="submenu" style="display: none;">
+					<li><a href="#">Web Design </a></li>
+					<li><a href="#">Hosting </a></li>
+					<li><a href="#">Design <span class="submenu-indicator">+</span></a>
+						<ul class="submenu">
+							<li><a href="#">Graphics </a></li>
+							<li><a href="#">Vectors </a></li>
+							<li><a href="#">Photoshop </a></li>
+							<li><a href="#">Fonts </a></li>
+						</ul>
+					</li>
+					<li><a href="#">Consulting </a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
+			<li><a href="#"><i class="fa fa-suitcase"></i>Portfolio <span class="submenu-indicator">+</span></a>
+				<ul class="submenu" style="">
+					<li><a href="#">Web Design </a></li>
+					<li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
+					</li>
+					<li><a href="#">Photoshop </a></li>
+					<li><a href="#">Programming </a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class="fa fa-user"></i>About </a></li>
+			<li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
+		   
+		</ul>
+		<div class="jquery-accordion-menu-footer">
+			Footer
+		</div>
+	</div>
         <div class='title-content'>
             <div class='content-controller'>
                 <div class='controller-item' id='add-title'>新增</div>
@@ -61,7 +70,8 @@
     </div>
     <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
 </div>
-<script src='/javascripts/jquery-2.0.3.min.js'></script>
+<script src="javascripts/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="javascripts/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
     var title = 'article';
     var item = 'web前端';
