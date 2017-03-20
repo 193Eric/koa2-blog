@@ -1,4 +1,5 @@
 body{
+    background: url("./../images/content.jpg");
                 background-size: cover;
                 background-attachment: fixed;
 }
@@ -17,6 +18,10 @@ body{
     cursor: pointer;
 }
 .title-item:hover{
+    background: #00A6C6;
+    color: #fff;
+}
+.item-select{
     background: #00A6C6;
     color: #fff;
 }
@@ -60,7 +65,7 @@ body{
         right: 0;
         margin: 0 auto;
 }
-.note-title{
+.article-title{
         width: 900px;
         position: absolute;
         top: 110px;
@@ -70,14 +75,14 @@ body{
         height: 30px;
         margin: 0 auto;
 }
-.note-title input{
+.article-title input{
     width: 100%;
     text-align: center;
     height: 100%;
     display: block;
     font-size: 16px;
 }
-.note-btn{
+.article-btn{
    position: absolute;
        width: 1020px;
        left:0;
@@ -87,7 +92,7 @@ body{
        top:680px;
        height: 30px;
 }
-.note-save-btn,.note-cancel-btn{
+.article-save-btn,.article-cancel-btn{
     color: #fff;
          background: #00A6C6;
     float: left;

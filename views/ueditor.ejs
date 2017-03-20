@@ -19,16 +19,16 @@
           <div class='ico'></div>
           <ul class="nav-ul">
             <li class="nav-select">
-              <a href="/">文章管理</a>
+              <a class='a-select' href="javascript:void(0)" id='article'>文章管理</a>
             </li>
             <li>
-              <a href="./book?title=Html5&name=null">留言版管理</a>
+              <a href="javascript:void(0)" id='message-board'>留言版管理</a>
             </li>
             <li>
-              <a href="/category/end">自我介绍管理</a>
+              <a href="javascript:void(0)" id='show-my'>自我介绍管理</a>
             </li>
             <li>
-              <a href="/category/trivial">项目作品管理</a>
+              <a href="javascript:void(0)" id='product'>项目作品管理</a>
             </li>
           </ul>
         </div>
@@ -36,7 +36,7 @@
     </header>
     <section>
         <div class='left-title'>
-            <div class='title-item'>Web前端</div>
+            <div class='title-item item-select'>Web前端</div>
             <div class='title-item'>Node</div>
             <div class='title-item'>UI</div>
             <div class='title-item'>随笔</div>
@@ -51,58 +51,70 @@
             <div class='content-item'></div>
         </div>
     </section>
-    <div class='note-title'>
+    <div class='article-title'>
         <input type='text' placeholder='文章标题'/>
     </div>
-    <div class='note-btn'>
+    <div class='article-btn'>
     
-    <div class='note-save-btn'>保存</div>
-    <div class='note-cancel-btn'>取消</div>
+    <div class='article-save-btn'>保存</div>
+    <div class='article-cancel-btn'>取消</div>
     </div>
     <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
 </div>
 <script src='/javascripts/jquery-2.0.3.min.js'></script>
 <script type="text/javascript">
+    var title = 'article';
+    var item = 'web前端';
     var ue;
     //实例化编辑器
     ue = UE.getEditor('editor');
     var showEdit;
     //显示编辑器；
     showEdit = function(){
-        $("#editor,.note-title,.note-btn").toggle();
+        $("#editor,.article-title,.article-btn").toggle();
         return;
     }
     var getHtml;
     //得到编辑器生成的html；
     getHtml = function(){
-        var title = $(".note-title input").val();
+        var title = $(".article-title input").val();
         var html = UE.getEditor('editor').getContent();
-        return {title:title,content:html};
+        return {title:title,html:html};
     }
     $("#add-title").click(function(){
         showEdit();
     })
-    $(".note-cancel-btn").click(function(){
+    $(".article-cancel-btn").click(function(){
         showEdit();
     })
-    $(".note-save-btn").click(function(){
-        var note = getHtml();
-        if(note.title==''){
+    $(".article-save-btn").click(function(){
+        var content = {
+            "title":title,
+            "title-item":item,
+            "html-top":getHtml().title,
+            "html":getHtml().html
+        }
+        if(content.html-top==''){
             alert("请输入文章标题");
             return;
         }else{
-            $.post("http://127.0.0.1:3000/edit",note,function(){
-                showEdit();
+            $.post("http://127.0.0.1:3000/edit",content,function(res){
+                if(res.error==0){
+                    showEdit();
+                }else{
+                    alert(res.ms);
+                }
             });
         }
     })
-    function hasContent() {
-        var arr = [];
-        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
-        arr.push("判断结果为：");
-        arr.push(UE.getEditor('editor').hasContents());
-        alert(arr.join("\n"));
-    }
+    $(".title-item").click(function(){
+        item = $(this).text();
+        $(".title-item").each(function(){
+            $(this).hasClass("item-select");
+            $(this).removeClass("item-select");
+        })
+        $(this).addClass("item-select");
+    })
     
 </script>
 </body>

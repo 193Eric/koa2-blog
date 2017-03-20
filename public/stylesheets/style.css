@@ -56,6 +56,7 @@ nav ul{
 }
 nav ul li {
     display: inline-block;
+    float: left;
 }
 nav ul li a {
   line-height: 100px;
@@ -69,6 +70,9 @@ nav ul li a {
 }
 nav ul li a:hover{
         color: #00aeef;
+}
+nav ul li .a-select{
+    color: #00aeef;
 }
 .ico{
   width: 150px;

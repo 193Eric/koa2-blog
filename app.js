@@ -64,42 +64,45 @@ app.use('/ueditor/ue', ueditor(path.join(__dirname, 'public'), function (req, re
 }))
 app.use('/', routes)
 var fs = require('fs')
-//判断文件夹存在;不存在则创建
-var fsLiveDir = function(name){
-    fs.exists(__dirname+name,function(_exit){
-        if(_exit){
-            console.log(name+"已存在");
-            return 0;
-        }else{
-            fs.mkdirSync(__dirname + name,function(err){
-              if(err){
-                  console.log(name+"创建失败");
-              }else{
-                  console.log(name+"创建成功");
-              }
-            })
+// 判断文件夹存在;不存在则创建
+var fsLiveDir = function (name) {
+  fs.exists(__dirname + name, function (_exit) {
+    if (_exit) {
+      console.log(name + '已存在')
+      return 0
+    }else {
+      fs.mkdirSync(__dirname + name, function (err) {
+        if (err) {
+          console.log(name + '创建失败')
+        }else {
+          console.log(name + '创建成功')
         }
-    })
+      })
+    }
+  })
 }
-var fsLiveFs = function(name){
-    fs.exists(__dirname+name,function(_exit){
-      if(_exit){
-          console.log(name+"已存在");
-          return 0;
-      }else{
-          fs.writeFile(__dirname + name,function(err){
-              if(err){
-                  console.log(name+"创建失败");
-              }else{
-                  console.log(name+"创建成功");
-              }
-          })
-      }
-    })
+var fsLiveFs = function (name, data,res) {
+  fs.exists(__dirname + name, function (_exit) {
+    if (_exit) {
+      res.send({'ms':name + '已存在','error':1})
+    }else {
+      fs.writeFile(__dirname + name, data, function (err) {
+        if (err) {
+          res.send({'ms':name + '创建失败','error':1})
+        }else {
+          res.send({'ms':name + '创建成功','error':0})
+        }
+      })
+    }
+  })
 }
 app.use('/edit', function (req, res) {
-  fsLiveDir("/note");
-  fsLiveDir("/note/web");
-  fsLiveFs("/note/web/web.txt");
+  var title = req.body['title']
+  var title_item = req.body['title-item']
+  var html_top = req.body['html-top']
+  var html = req.body['html']
+  fsLiveDir('/' + title)
+  fsLiveDir('/' + title + '/' + title_item)
+  var ms = fsLiveFs('/' + title + '/' + title_item + '/' + html_top + '.ejs', html,res);
 })
 module.exports = app
