@@ -7,10 +7,12 @@
 }
 
 .jquery-accordion-menu {
-	min-width: 260px;
-	float: left;
-	position: relative;
-	box-shadow: 0 20px 50px #333
+		    min-width: 260px;
+	    float: left;
+	    height: 90%;
+	    background: #ED5565;
+	    position: relative;
+	    box-shadow: 0 20px 50px #333;
 }
 
 .jquery-accordion-menu .jquery-accordion-menu-footer,.jquery-accordion-menu .jquery-accordion-menu-header {

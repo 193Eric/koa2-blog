@@ -1,31 +1,56 @@
-body{
+html,body{
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     background: #fff;   
 }
 .content{
-        width: 200px;
+    width: 100%;
+    height: 100%;
+}
+.sild-content{
+    width: 260px;
     height: 100%;
     float: left;
 }
+.body-content{
+    width: auto;
+    margin-left: 260px;
+    position: relative;
+    height: 90%;
+        overflow: hidden;
+}
+#add-title{
+    float: right;
+    line-height: 46px;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 20px;
+    margin-right: 30px;
+}
+.body-top{
+    width: 100%;
+    height: 46px;
+    float: left;
+    background: #00A6C6
+}
 #editor{
-        width: 1024px;
+        width: 100%;
         display: none;
         position: absolute;
-        top: 150px;
-        left: 0;
+        top: 80px;
+        left: 0px;
         right: 0;
-        margin: 0 auto;
 }
 .article-title{
-        width: 900px;
+        width: 100%;
         position: absolute;
-        top: 110px;
+        top: 46px;
         left: 0;
         right: 0;
         display: none;
         height: 30px;
-        margin: 0 auto;
 }
 .article-title input{
     width: 100%;
@@ -36,21 +61,21 @@ body{
 }
 .article-btn{
    position: absolute;
-       width: 1020px;
-       left:0;
-       right: 0;
+   background: #00A6C6;
+       width: 100%;
+       z-index: 1000;
+       left:0px;
        display: none;
        margin: 0 auto;
-       top:680px;
+       bottom:0;
        height: 30px;
 }
 .article-save-btn,.article-cancel-btn{
     color: #fff;
-         background: #00A6C6;
-    float: left;
+    float: right;
     line-height: 30px;
     text-align: center;
-    margin-right: 20px;
-    padding: 0 50px;
-    font-size: 20px;
+    font-size: 16px;
+    padding: 0 20px;
+    margin-right: 30px;
 }

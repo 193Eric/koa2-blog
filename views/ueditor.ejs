@@ -13,37 +13,30 @@
 </head>
 <body>
 <div class='content'>
+<div class='sild-content'>
       <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
 		<ul id="demo-list">
-		   <li class=""><a href="#"><i class="fa fa-home"></i>Home </a></li>
-			<li><a href="#"><i class="fa fa-glass"></i>Events </a></li>
-			<li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">
+		   <li class=""><a href="#"><i class="fa fa-home"></i>web前端<span class="submenu-indicator">+</span></a>
+                <ul class="submenu" style="display: none;">
+					<li><a href="#">Css</a></li>
+					<li><a href="#">Node</a></li>
+					<li><a href="#">UI</a></li>
+					<li><a href="#">Vuejs</a></li>
+				</ul>
+           </li>
+           <li class=""><a href="#"><i class="fa fa-home"></i>后台<span class="submenu-indicator">+</span></a>
+                <ul class="submenu" style="display: none;">
+					<li><a href="#">node</a></li>
+					<li><a href="#">php</a></li>
+					<li><a href="#">计算机网络</a></li>
+					<li><a href="#">服务器</a></li>
+				</ul>
+           </li>
+			<li><a href="#"><i class="fa fa-glass"></i>个人作品</a></li>
+            <li><a href="#"><i class="fa fa-bomb"></i>随笔</a></li>
+			<li><a href="#"><i class="fa fa-file-image-o"></i>留言板</a><span class="jquery-accordion-menu-label">
 				12 </span></li>
-			<li class="active"><a href="#" class=""><span class="ink animate-ink" style="height: 260px; width: 260px; top: -106.8px; left: 88.4px;"></span><i class="fa fa-cog"></i>Services <span class="submenu-indicator">+</span></a>
-				<ul class="submenu" style="display: none;">
-					<li><a href="#">Web Design </a></li>
-					<li><a href="#">Hosting </a></li>
-					<li><a href="#">Design <span class="submenu-indicator">+</span></a>
-						<ul class="submenu">
-							<li><a href="#">Graphics </a></li>
-							<li><a href="#">Vectors </a></li>
-							<li><a href="#">Photoshop </a></li>
-							<li><a href="#">Fonts </a></li>
-						</ul>
-					</li>
-					<li><a href="#">Consulting </a></li>
-				</ul>
-			</li>
-			<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
-			<li><a href="#"><i class="fa fa-suitcase"></i>Portfolio <span class="submenu-indicator">+</span></a>
-				<ul class="submenu" style="">
-					<li><a href="#">Web Design </a></li>
-					<li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
-					</li>
-					<li><a href="#">Photoshop </a></li>
-					<li><a href="#">Programming </a></li>
-				</ul>
-			</li>
+			<li><a href="#"><i class="fa fa-suitcase"></i>photo</a></li>
 			<li><a href="#"><i class="fa fa-user"></i>About </a></li>
 			<li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
 		   
@@ -52,27 +45,27 @@
 			Footer
 		</div>
 	</div>
-        <div class='title-content'>
-            <div class='content-controller'>
-                <div class='controller-item' id='add-title'>新增</div>
-                <div class='controller-item' id='delete-title'>删除</div>
-            </div>
-            <div class='content-item'></div>
-        </div>
     </section>
+</div>
+<div class='body-content'>
+    <div class='body-top'>
+        <div id='add-title'>新增</div>
+    </div>
     <div class='article-title'>
         <input type='text' placeholder='文章标题'/>
     </div>
-    <div class='article-btn'>
-    
-    <div class='article-save-btn'>保存</div>
-    <div class='article-cancel-btn'>取消</div>
-    </div>
     <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+    <div class='article-btn'>
+        <div class='article-save-btn'>保存</div>
+        <div class='article-cancel-btn'>取消</div>
+    </div>
+</div>
 </div>
 <script src="javascripts/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="javascripts/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
+    $("#edui1,#editor").css({width:"100%"});
+    //初始化编辑器宽度；
     var title = 'article';
     var item = 'web前端';
     var ue;
@@ -126,6 +119,39 @@
         $(this).addClass("item-select");
     })
     
+$.expr[":"].Contains = function(a, i, m) {
+	return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+};
+function filterList(header, list) {
+	//@header 头部元素
+	//@list 无需列表
+	//创建一个搜素表单
+	var form = $("<form>").attr({
+		"class":"filterform",
+		action:"#"
+	}), input = $("<input>").attr({
+		"class":"filterinput",
+		type:"text"
+	});
+	$(form).append(input).appendTo(header);
+	$(input).change(function() {
+		var filter = $(this).val();
+		if (filter) {
+			$matches = $(list).find("a:Contains(" + filter + ")").parent();
+			$("li", list).not($matches).slideUp();
+			$matches.slideDown();
+		} else {
+			$(list).find("li").slideDown();
+		}
+		return false;
+	}).keyup(function() {
+		$(this).change();
+	});
+}
+$(function() {
+	filterList($("#form"), $("#demo-list"));
+});
+jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 </script>
 </body>
 </html>
