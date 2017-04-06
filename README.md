@@ -1,10 +1,18 @@
-# node-ejs-web
-#### 导语:  
-> 用Node ejs模板 和Mysql搭建一个 个人博客网站后台基础，写博客用的框架是ueditor，在模板里面已经引入，数据也配置好了，可以拿数据到前端展示。可以直接对模板进行修改
-### 第一步:   
-首先在电脑上安装node ,然后再用npm安装 express、ejs,Fork下文件夹后，在bin文件夹命令行输入node www;如果报错了，看提示缺少什么模块，就用npm进行安装，
-直到可以运行为止。  
-### 第二步:
-运行成功后，在浏览器输入:127.0.0.1:3000,就可以进入网站首页。（首页什么都没~~~要什么自己添！），然后进入127.0.0.1:3000/edit，进入文档编辑页面，这里我设置了4个分类，可以选择分类。  
-### 最后一步
-点击添加按钮，然后在富文本编辑中输入你的文章内容和标题，点击保存。后台会自动帮你生成一个article文件夹。在article文件夹中的有一个你选择的分类名称(**例如：我选择的是web前端文章分类，里面就有一个web前端文件夹**)的文件夹。在这个文件夹中，有你的标题命名的ejs文件。里面是你富文本输入的东西的html代码。可以直接从文件中取出来，展示在页面上！ 这样，一个简单的后台写博客，保存博客的系统就搞定了~ 让我们一步步完善自己的网站吧。
+# vue-node-demo
+
+> vue+node
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
