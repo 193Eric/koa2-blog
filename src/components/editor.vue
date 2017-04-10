@@ -1,6 +1,7 @@
 <template>
     <div>
-        <markdown-editor v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
+        <markdown-editor v-show='false' v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
+        <el-button v-on:click='getHtml()'>获得html</el-button>
     </div>
 </template>
 
@@ -11,8 +12,7 @@
             return {
                 content:'',                                 // markdown编辑器内容
                 configs: {                                  // markdown编辑器配置参数
-                    status: false,                          // 禁用底部状态栏
-                    initialValue: 'Hello BBK',              // 设置初始值
+                    initialValue: 'Hello Eric',              // 设置初始值
                     renderingConfig: {
                         codeSyntaxHighlighting: true,       // 开启代码高亮
                         highlightingTheme: 'atom-one-light' // 自定义代码高亮主题
@@ -20,8 +20,19 @@
                 }
             }
         },
+        computed: {
+            simplemde () {
+            return this.$refs.markdownEditor.simplemde
+            }
+        },
         components: {
             markdownEditor                                  // 声明组件markdownEditor
+        },
+        methods:{
+            getHtml(){
+                let $html = '';
+                $html = this.simplemde.markdown(this.content);
+            }
         }
     }
 </script>

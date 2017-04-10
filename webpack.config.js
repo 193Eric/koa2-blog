@@ -16,8 +16,12 @@ module.exports = {
         options: {
           loaders: {
           }
-          // other vue-loader options go here
+        // other vue-loader options go here
         }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
       },
       {
         test: /\.js$/,
@@ -32,12 +36,12 @@ module.exports = {
         }
       },
       {
-          test: /\.less$/,
-          loader: 'style-loader!css-loader!less-loader' 
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
       },
       {
-          test: /\.css$/, 
-          loader: 'style-loader!css-loader' 
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   },

@@ -9,11 +9,14 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "babel-plugin-component": "^0.9.1",
+    "element-ui": "^1.2.8",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "style-loader": "^0.16.1",
     "vue": "^2.2.1",
     "vue-quill-editor": "^2.0.4",
+    "vue-simplemde": "^0.3.7"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
