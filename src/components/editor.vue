@@ -1,7 +1,6 @@
 <template>
     <div>
         <markdown-editor v-show='false' v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
-        <el-button v-on:click='getHtml()'>获得html</el-button>
     </div>
 </template>
 
