@@ -1,6 +1,10 @@
 <template>
     <div>
-        <markdown-editor v-show='false' v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
+        <markdown-editor v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
+        <div class='btn-box'>
+            <el-button type="primary" size="large">保存</el-button>
+            <el-button type="primary" size="large">取消</el-button>
+        </div>
     </div>
 </template>
 
@@ -35,3 +39,9 @@
         }
     }
 </script>
+<style>
+    .btn-box{
+        wdith:100%;
+        text-align:center;
+    }
+</style>

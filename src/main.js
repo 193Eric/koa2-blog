@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router.js'
-import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Progress, Badge, Tabs, TabPane } from 'element-ui'
+import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Progress, Badge, Tabs, TabPane, Tag, Dialog } from 'element-ui'
 Vue.use(Button)
 Vue.use(Menu)
 Vue.use(Submenu)
@@ -13,6 +13,8 @@ Vue.use(Progress)
 Vue.use(Badge)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Tag)
+Vue.use(Dialog)
 new Vue({
   router,
   el: '#app',
