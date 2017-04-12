@@ -4,66 +4,27 @@
           <el-col :span='24'></el-col>
       </el-row>
       <el-row id='content'>
-        <el-col class='side-meau'>
-          <div class='side-title'>工作台</div>
-          <div class='side-img'>
-            <img src='src/assets/images/logo.jpg' />
-          </div>
-          <div class='divline'></div>
-          <el-menu default-active="2" class="el-menu-vertical-demo" theme='light'>
-          <el-menu-item index="home"><i class="el-icon-share"></i>首页</el-menu-item>
-          <el-menu-item index="article"><i class="el-icon-edit"></i>博客</el-menu-item>
-          <el-menu-item index="project"><i class="el-icon-setting"></i>项目</el-menu-item>
-          <el-submenu index="ohter">
-            <template slot="title"><i class="el-icon-menu"></i>其他</template>
-                <el-menu-item index="comment">
-                  <el-badge :value="2" :max="10"  class="item">
-                    <span>评论</span>
-                  </el-badge>
-                </el-menu-item>
-              <el-menu-item index="Leaving">留言</el-menu-item>
-              <el-menu-item index="footprint">足迹</el-menu-item>
-          </el-submenu>
-        </el-menu>
-      </el-col>
+      <meau></meau>
       <el-col :span='24' class='title-content'>
-            <el-col :span='24' class='banner'>
-              <img src='src/assets/images/banner.jpg'/>
-            </el-col>
-            <el-col :lg='6' :md='8' :sm='12' :xs='24' class='cricle'>
-              <el-progress type="circle" :percentage="0"></el-progress>
-              <p>当日访问量</p>
-            </el-col>
-            <el-col :lg='6' :md='8' :sm='12' :xs='24' class='cricle'>
-              <el-progress type="circle" :percentage="30"></el-progress>
-              <p>近三月访问量</p>
-            </el-col>
-            <el-col :lg='6' :md='8' :sm='12' :xs='24' class='cricle'>
-              <el-progress type="circle" :percentage="60"></el-progress>
-              <p>月提交数</p>
-            </el-col>
-            <el-col :lg='6' :md='8' :sm='12' :xs='24' class='cricle'>
-              <el-progress type="circle" :percentage="20"></el-progress>
-              <p>留言数</p>
-            </el-col>
+        <router-view></router-view>
       </el-col>
     </el-row>
-     <Editor></Editor>
   </div>
 </template>
 
 <script>
-import Editor from './components/editor.vue';
+import meau from './components/meau.vue';
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
-  components:{
-    Editor,
-    
+  components:{ 
+    meau
+  },
+  methods:{
+      
   }
 }
 </script>
