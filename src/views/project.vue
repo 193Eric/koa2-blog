@@ -24,7 +24,7 @@
                         <div style="padding: 14px;">
                             <span>好吃的汉堡</span>
                             <div class="bottom clearfix">
-                            <time class="time">{{ currentDate }}</time>
+                            <time class="time"></time>
                             <el-button type="primary" icon="edit" @click='addDialogVisible=true'></el-button>
                             <el-button type="warning" icon="delete" @click='dialogVisible=true'></el-button>
                             </div>
