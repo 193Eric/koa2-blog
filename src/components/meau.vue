@@ -9,7 +9,6 @@
           <el-menu default-active="2" class="el-menu-vertical-demo" theme='light' @select="handleSelect" router>
           <el-menu-item index="/"><i class="el-icon-share"></i>首页</el-menu-item>
           <el-menu-item index="blog"><i class="el-icon-edit"></i>博客</el-menu-item>
-          <el-menu-item index="project"><i class="el-icon-setting"></i>项目</el-menu-item>
           <el-submenu index="ohter">
             <template slot="title"><i class="el-icon-menu"></i>其他</template>
                 <el-menu-item index="comment">
