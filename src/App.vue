@@ -3,6 +3,7 @@
   <div id="app" @click.stop="meauClose">
       <el-row id='top-box'>
           <el-col :span='24'>
+            <span class='name'> &nbsp&nbspHi~ welcome to you </span>
             <el-button type="text" class='drop-meau' v-on:click.stop='showMeau'>
               Eric  <i class="el-icon-caret-bottom el-icon--right" v-if='!meauShow'></i>
                     <i class="el-icon-caret-top el-icon--right" v-if='meauShow'></i>
@@ -63,10 +64,16 @@ body,html{
   #top-box{
     background:@color;
     height:50px;
+    color:#fff;
+    text-indent:40px;
+    line-height:48px;
     z-index:10;
     width:100%;
     position:absolute;
     top:0;
+    .name{
+      color:#F7BA2A
+    }
     .drop-meau{
       float:right;
       color:#fff;
