@@ -1,6 +1,9 @@
 <template>
     <div>
         <canvas id='canvas' width='960' height='500'></canvas>
+        <div class='statis-title'>
+            近一月访问情况线状图
+        </div>
     </div>
 </template>
 <script>
@@ -31,12 +34,12 @@
             ctx.font = "14px 微软雅黑";
             //设置字体填充颜色
             ctx.fillStyle = "#4d4d4d";
-            for(var i=0,len=23;i<=len;i++){
-                ctx.fillText(i,30+i*38,500);
+            for(var i=0,len=30;i<=len;i++){
+                ctx.fillText(i,30+i*30,500);
             }
             //绘制竖条文字
             for(var i=1,len=5;i<=len;i++){
-                ctx.fillText(i*20,0,480-i*80);
+                ctx.fillText(i*10,0,480-i*80);
             }
             //绘制横条
             ctx.strokeStyle = '#ddd';
@@ -50,7 +53,7 @@
             let ctx = this.ctx;
             ctx.beginPath();
             ctx.globalCompositeOperation='source-over';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
             ctx.strokeStyle = color;
             ctx.moveTo(step,step2);
             ctx.lineTo(step3,step4);
@@ -66,10 +69,11 @@
             var num = 1;
             var draw = ()=>{
                 drawLine();
-                if(num==30){
+                if(num==15){
                     num = 0;
                     step++;
                     if(step==initArrX.length){
+                        that.ctx.scale(0.2,0.2);
                         window.cancelAnimationFrame(draw)
                         return;
                     }
@@ -82,7 +86,7 @@
                 window.requestAnimationFrame(draw)
             }
             var drawLine = ()=>{
-                x = (initArrX[step+1]-initArrX[step])/30;
+                x = (initArrX[step+1]-initArrX[step])/15;
                 y = (X - initArrX[step])/(initArrX[step+1]-initArrX[step])*(initArrY[step+1]-initArrY[step])+initArrY[step];
             }
             drawLine();
@@ -99,5 +103,12 @@
     canvas{
         display:block;
         margin:0 auto;
+        
+    }
+    .statis-title{
+        width:100%;
+        text-align:center;
+        line-height:80px;
+        font-size:18px;
     }
 </style>
