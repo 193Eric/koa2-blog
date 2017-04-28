@@ -1,8 +1,18 @@
 
 <template>
-  <div id="app">
+  <div id="app" @click.stop="meauClose">
       <el-row id='top-box'>
-          <el-col :span='24'></el-col>
+          <el-col :span='24'>
+            <el-button type="text" class='drop-meau' v-on:click.stop='showMeau'>
+              Eric  <i class="el-icon-caret-bottom el-icon--right" v-if='!meauShow'></i>
+                    <i class="el-icon-caret-top el-icon--right" v-if='meauShow'></i>
+            </el-button>
+            <ul class='meau' v-show='meauShow'>
+                <li>修改资料</l>
+                <li>修改密码</li>
+                <li>退出</li>
+              </ul>
+          </el-col>
       </el-row>
       <el-row id='content'>
       <meau></meau>
@@ -19,13 +29,19 @@ export default {
   name: 'app',
   data () {
     return {
+      meauShow:false
     }
   },
   components:{ 
     meau
   },
   methods:{
-      
+      showMeau(){
+        this.meauShow = !this.meauShow;
+      },
+      meauClose(){
+        this.meauShow =false;
+      }
   }
 }
 </script>
@@ -47,11 +63,45 @@ body,html{
   #top-box{
     background:@color;
     height:50px;
+    z-index:10;
     width:100%;
     position:absolute;
     top:0;
+    .drop-meau{
+      float:right;
+      color:#fff;
+      font-size:18px;
+      margin: 5px;
+      margin-right:60px;
+      position:relative;
+    }
+    .meau{
+        margin: 5px 0;
+        background-color: #fff;
+        border: 1px solid #d1dbe5;
+        box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.12);
+        padding: 6px 0;
+        z-index: 30;
+        position: absolute;
+        top: 30px;
+        right: 60px;
+        min-width: 100px;
+        li{
+          list-style: none;
+          line-height: 36px;
+          padding: 0 10px;
+          margin: 0;
+          cursor: pointer;
+          font-size:14px;
+          color:#4d4d4d;
+        }
+        li:hover{
+          background:#99A9BF;
+          color:#fff;
+        }
+      }
   }
-  .title-content{
+  .dropdown{
     height:100%;
   }
   #content{
