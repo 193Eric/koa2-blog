@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from 'axios'
 import App from './App.vue'
 import router from './router.js'
 import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Badge, Tabs, TabPane, Tag, Dialog,} from 'element-ui'
@@ -14,6 +15,7 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Tag)
 Vue.use(Dialog)
+Vue.prototype.$ajax = axios
 new Vue({
   router,
   el: '#app',
