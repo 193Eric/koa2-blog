@@ -16,6 +16,7 @@
     "express": "^4.15.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
+    "mysql": "^2.13.0",
     "style-loader": "^0.16.1",
     "vue": "^2.2.1",
     "vue-quill-editor": "^2.0.4",
