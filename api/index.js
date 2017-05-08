@@ -16,7 +16,44 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/', function (req, res) {})
 // 文章接口
 app.post('/set_note', function (req, res) {
-  console.log(req.body)
+  var data = req.body
+  sql.query('insert into blog set ?', {name: data.title,type: data.tag,text: data.html}, function (err) {
+    if (err) {
+      console.log(err)
+      res.send({code: 0})
+    }else {
+      console.log('新建blog成功:  ' + data.title)
+      res.send({code: 1})
+    }
+  })
+})
+app.post('/get_note', function (req, res) {
+  sql.query('select * from blog', function (err, rows) {
+    if (err) {
+      console.log(err)
+      res.send({code: 0})
+    }else {
+      var data = {}
+      for (var i = 0; i < rows.length; i++) {
+        data[i] = {
+          title: rows[i].name,
+          type: rows[i].type.split("-"),
+        }
+      }
+      res.send({code: 1,data: data})
+    }
+  })
+})
+app.post('/delete_note', function (req, res) {
+  var name = req.body.name
+  sql.query('delete from blog where name='+name, function (err, rows) {
+    if (err) {
+      console.log(err)
+      res.send({code: 0})
+    }else {
+      res.send({code: 1})
+    }
+  })
 })
 app.use(express.static('images'))
 var server = app.listen(3000, function () {

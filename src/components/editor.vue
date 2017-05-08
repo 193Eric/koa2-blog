@@ -58,12 +58,28 @@
             },
             save(){
                 var that = this;
-                var data = {
+                this.$ajax.post('http://127.0.0.1:3000/set_note',this.$qs.stringify({
                     title : that.title,
                     html : that.getHtml(),
-                    tag : that.tagBox
-                }
-                this.$ajax.post('http://127.0.0.1:3000/set_note',data).then(res=>console.log(res))
+                    tag : that.tagBox.join('-')
+                })).then(res=>{
+                    if(res.code!=0){
+                        that.$message({
+                            showClose: true,
+                            message: '保存成功',
+                            type: 'success'
+                        })
+                    }else{
+                        that.$message({
+                            showClose: true,
+                            message: '提交失败',
+                            type: 'error'
+                        })
+                    }
+                    that.title = '';
+                    that.tagBox = [];
+                    that.content = '';
+                })
             }
         }
     }
