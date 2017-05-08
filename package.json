@@ -8,11 +8,12 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "api": "node api/index",
-    "sqlInit":"node api/dbInit"
+    "sqlInit": "node api/dbInit"
   },
   "dependencies": {
     "axios": "^0.16.1",
     "babel-plugin-component": "^0.9.1",
+    "body-parser": "^1.17.1",
     "element-ui": "^1.2.8",
     "express": "^4.15.2",
     "less": "^2.7.2",

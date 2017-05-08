@@ -1,6 +1,6 @@
-var sql = require("./connect");
-const NAME = '193Eric';
-const PASSWORD = '123456';
+var sql = require('./connect')
+const NAME = '193Eric'
+const PASSWORD = '123456'
 var dbInit = function () {
   sql.connect(function (err) {
     if (err) {
@@ -19,7 +19,8 @@ var dbInit = function () {
       sql.query('insert into person set ?', {user: NAME,password: PASSWORD}, function (err) {
         !err ? console.log('person初始化成功') : console.log(err)
       })
+      sql.end()
     }
   })
 }
-dbInit();
+dbInit()

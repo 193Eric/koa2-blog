@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type='text' class='title' placeholder='输入标题'>
+        <input type='text' class='title' placeholder='输入标题' v-model='title'>
         <markdown-editor v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
         <div class='add-tag'>
             添加标签：<input type='text' v-model='tagName'><el-button type='primary' size='mini' @click='addTag'>添加</el-button>
@@ -11,8 +11,7 @@
             </div>
         </div>
         <div class='btn-box'>
-            <el-button type="primary" size="large">保存</el-button>
-            <el-button type="primary" size="large">取消</el-button>
+            <el-button type="primary" size="large" @click='save'>保存</el-button>
         </div>
     </div>
 </template>
@@ -30,6 +29,7 @@
                         highlightingTheme: 'atom-one-light' // 自定义代码高亮主题
                     }
                 },
+                title:"",
                 tagName:'',
                 tagBox:[]
             }
@@ -46,12 +46,24 @@
             getHtml(){
                 let $html = '';
                 $html = this.simplemde.markdown(this.content);
+                return $html;
             },
             addTag(){
-                this.tagName!=''?this.tagBox.push(this.tagName):0
+                this.tagName!=''?this.tagBox.push(this.tagName):0;
+                this.tagName = '';
+
             },
             handleClose(index) {
                  this.tagBox.splice(this.tagBox.indexOf(index), 1);
+            },
+            save(){
+                var that = this;
+                var data = {
+                    title : that.title,
+                    html : that.getHtml(),
+                    tag : that.tagBox
+                }
+                this.$ajax.post('http://127.0.0.1:3000/set_note',data).then(res=>console.log(res))
             }
         }
     }
