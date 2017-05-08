@@ -1,6 +1,8 @@
 var express = require('express')
 var app = express()
-var sql = require('./sql')
+var sql = require('./connect')
+sql.connect();
+// 配置允许跨域请求；
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With')
@@ -11,11 +13,7 @@ app.all('*', function (req, res, next) {
 })
 app.post('/', function (req, res) {})
 // 文章接口
-app.get('/setNote', function (req, res) {
-  sql.query('select * from wp_address', function (err, rows, fields) {
-    console.log(rows)
-  })
-})
+app.get('/setNote', function (req, res) {})
 app.use(express.static('images'))
 var server = app.listen(3000, function () {
   var port = server.address().port
