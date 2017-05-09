@@ -7,38 +7,19 @@
                     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
                 </span>
             </el-dialog>
-            <div class='card'>
+            <div class='card' v-for = "item in noteData">
                 <div class='manager'>
                     <el-button type="primary" size="mini" icon="edit"></el-button>
                     <el-button type="primary" size="mini" @click="dialogVisible = true" icon="delete"></el-button>
                 </div>
                 <div class='card-title'>
-                    webpack+vue+vueRouter+es6 构建的简单实例项目 
+                    {{item.title}}
                 </div>
                 <div class='tag-box'>
-                    <el-tag type="primary">Vue</el-tag>
-                    <el-tag type="success">WebPack</el-tag>
-                    <el-tag type="warning">Web</el-tag>
+                    <el-tag :type='redomColor()' v-for='items in item.type'>{{items}}</el-tag>
                 </div>
                 <a class='remand'>
                     赞(1)&nbsp&nbsp评论(2)
-                </a>
-            </div>
-            <div class='card'>
-                <div class='manager'>
-                    <el-button type="primary" size="mini" icon="edit"></el-button>
-                    <el-button type="primary" size="mini"  @click="dialogVisible = true" icon="delete"></el-button>
-                </div>
-                <div class='card-title'>
-                    写出高性能的js代码 
-                </div>
-                <div class='tag-box'>
-                    <el-tag type="primary">Js</el-tag>
-                    <el-tag type="success">SEO优化</el-tag>
-                    <el-tag type="warning">Web</el-tag>
-                </div>
-                <a class='remand'>
-                    赞(3)&nbsp&nbsp评论(2)
                 </a>
             </div>
         </div>
@@ -48,13 +29,29 @@
     data() {
       return {
         dialogVisible: false,
+        noteData:"",
+        color:['success','warning','primary']
       }
-    },
+    }, 
     components:{
 
     },
+    mounted(){
+        var that = this;
+        this.$ajax.post('http://127.0.0.1:3000/get_note').then(res=>{
+                    var  res = that.$qs.parse(res).data;
+                    if(res.code!=0){
+                        that.noteData = res.data;
+                    }else{
+                       
+                    }
+                })
+    },
     methods: {
-
+        redomColor(value){
+        var num = Math.floor(Math.random()*3)
+        return this.color[num]
+      } 
     }
   };
 </script>
