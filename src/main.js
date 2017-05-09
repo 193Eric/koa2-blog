@@ -2,12 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import App from './App.vue'
 import router from './router.js'
-<<<<<<< HEAD
-import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Badge, Tabs, TabPane, Tag, Dialog,Input,Message} from 'element-ui'
-=======
+import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Badge, Tabs, TabPane, Tag, Dialog, Input, Message } from 'element-ui'
 import qs from 'qs'
-import { Button, Menu, Submenu, MenuItem, MenuItemGroup, Row, Col, Badge, Tabs, TabPane, Tag, Dialog, Message } from 'element-ui'
->>>>>>> 182ea4866011902129d2316077ba0a0b6f3bd758
 Vue.use(Button)
 Vue.use(Menu)
 Vue.use(Submenu)

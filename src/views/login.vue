@@ -1,4 +1,5 @@
 <template>
+  <div id='login'  @keyup.enter='login'>
     <div class="login-box"> 
         <div class="title">个人博客管理系统</div>
         <el-input v-model="username" placeholder="请输入登陆账号" name="username"></el-input>
@@ -7,6 +8,7 @@
         <el-button type="text">忘记密码</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button type="text">注册账号</el-button>
     </div>
+  </div>  
 </template>
 <script>
 export default {
@@ -16,10 +18,29 @@ export default {
         password:''
       }
     },
+    mounted(){
+      if(sessionStorage.getItem('name')){
+        this.$router.push("/index/home")
+      }
+    },
     methods:{
       login(){
+         var that = this;
          if(this.username!=''&&this.password!=''){
-
+              this.$ajax.post('http://127.0.0.1:3000/login',this.$qs.stringify({
+                    username : that.username,
+                    password : that.password,
+                })).then(res=>{
+                    if(res.data.code==1){
+                      that.$message.success("验证通过");
+                      sessionStorage.setItem('name',that.username);
+                      setTimeout(function(){
+                          that.$router.push("/index/home")
+                      },500)
+                    }else{
+                      that.$message.error("账号密码错误！")
+                    }
+                })
          }else{
            this.$message.error('账号和密码不能为空');
          }
@@ -27,20 +48,12 @@ export default {
     }
 }
 </script>
-<style lang='less'>
-   body{
-     background-color:#2f4d69
-   }
-   #top-box{
-     display:none;
-   }
-   .side-meau{
-     display:none;
-   }
-   #app #content .title-content{
-     padding-left:0;
-     background-color:transparent;
-   }
+<style lang='less' scoped>
+   #login{
+     width:100%;
+     height:100%;
+     background:#2f4d69;
+   } 
    .login-box{
       width:300px;
       margin:auto;

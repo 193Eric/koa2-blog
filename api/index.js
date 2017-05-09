@@ -37,7 +37,7 @@ app.post('/get_note', function (req, res) {
       for (var i = 0; i < rows.length; i++) {
         data[i] = {
           title: rows[i].name,
-          type: rows[i].type.split("-"),
+          type: rows[i].type.split('-')
         }
       }
       res.send({code: 1,data: data})
@@ -46,8 +46,18 @@ app.post('/get_note', function (req, res) {
 })
 app.post('/delete_note', function (req, res) {
   var name = req.body.name
-  sql.query('delete from blog where name='+name, function (err, rows) {
+  sql.query('delete from blog where name=' + name, function (err, rows) {
     if (err) {
+      console.log(err)
+      res.send({code: 0})
+    }else {
+      res.send({code: 1})
+    }
+  })
+})
+app.post('/login', function (req, res) {
+  sql.query('select user from person where user="' + req.body.username + '" and password=' + req.body.password, function (err, rows) {
+    if (err || rows.length == 0) {
       console.log(err)
       res.send({code: 0})
     }else {
