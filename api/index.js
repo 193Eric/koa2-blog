@@ -12,7 +12,7 @@ app.all('*', function (req, res, next) {
 app.post('/', function (req, res) {})
 // 文章接口
 app.get('/setNote', function (req, res) {
-  sql.query('select * from wp_address', function (err, rows, fields) {
+  sql.query('select * from wp_address', function (err, rows, fields){
     console.log(rows)
   })
 })
