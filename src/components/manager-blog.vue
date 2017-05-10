@@ -35,7 +35,7 @@
       }
     }, 
     components:{
-
+        
     },
     mounted(){
         this.getList();

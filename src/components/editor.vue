@@ -13,11 +13,15 @@
         <div class='btn-box'>
             <el-button type="primary" size="large" @click='save'>保存</el-button>
         </div>
+        <img :src="src">
+        <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" v-bind:crop="false" url="http://localhost:3000/sendImg" extensions="png,gif,jpeg,jpg"></vue-core-image-upload>
+        
     </div>
 </template>
 
 <script>
     import { markdownEditor } from 'vue-simplemde';         // 导入markdownEditor组件
+    import VueCoreImageUpload  from 'vue-core-image-upload'; //导入传图片组件
     export default {
         data: function(){
             return {
@@ -31,7 +35,8 @@
                 },
                 title:"",
                 tagName:'',
-                tagBox:[]
+                tagBox:[],
+                src:''
             }
         },
         computed: {
@@ -40,7 +45,8 @@
             }
         },
         components: {
-            markdownEditor                                  // 声明组件markdownEditor
+            markdownEditor,
+            VueCoreImageUpload                                  // 声明组件markdownEditor
         },
         methods:{
             getHtml(){
@@ -55,6 +61,11 @@
             },
             handleClose(index) {
                  this.tagBox.splice(this.tagBox.indexOf(index), 1);
+            },
+            imageuploaded(res) {
+                if (res.errcode == 0) {
+                    this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png';
+                }
             },
             save(){
                 var that = this;

@@ -65,6 +65,9 @@ app.post('/login', function (req, res) {
     }
   })
 })
+app.post('/sendImg',function(res){
+  console.log(res);
+})
 app.use(express.static('images'))
 var server = app.listen(3000, function () {
   var port = server.address().port
