@@ -34,11 +34,12 @@
         nowName:'',
       }
     }, 
-    components:{
-        
-    },
     mounted(){
+        var that = this;
         this.getList();
+        this.$help.$on("getlist",function(){
+            that.getList();
+        })
     },
     methods: {
         getList(){
@@ -107,6 +108,9 @@
             position:absolute;
             left:20px;
             bottom:10px;
+            span{
+                margin:0 2px;
+            }
         }
         .manager{
             position:absolute;

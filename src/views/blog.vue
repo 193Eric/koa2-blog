@@ -27,7 +27,9 @@
     },
     methods: {
       handleClick(tab, event) {
-        console.log(tab, event);
+        if(tab.name=='first'){
+            this.$help.$emit('getlist');
+        }
       }
     }
   };
