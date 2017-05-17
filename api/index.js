@@ -65,6 +65,16 @@ app.post('/login', function (req, res) {
     }
   })
 })
+app.post('/register', function (req, res) {
+  sql.query('insert  into person set ?' ,{user:req.body.username,password:req.body.password},function (err, rows) {
+    if (err || rows.length == 0) {
+      console.log(err)
+      res.send({code: 0})
+    }else {
+      res.send({code: 1})
+    }
+  })
+})
 app.post('/sendImg',function(res){
   console.log(res);
 })
