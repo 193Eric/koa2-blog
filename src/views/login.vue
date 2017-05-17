@@ -3,10 +3,10 @@
     <div class="login-box"> 
         <div class="title">个人博客管理系统</div>
         <el-input v-model="username" placeholder="请输入登陆账号" name="username"></el-input>
-        <el-input v-model="password" placeholder="请输入登陆密码" name="password"></el-input>
+        <el-input v-model="password" type="password" placeholder="请输入登陆密码" name="password"></el-input>
         <el-button @click='login'>登陆</el-button>
         <el-button type="text">忘记密码</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <el-button type="text">注册账号</el-button>
+        <el-button type="text" @click='register'>注册账号</el-button>
     </div>
   </div>  
 </template>
@@ -44,6 +44,9 @@ export default {
          }else{
            this.$message.error('账号和密码不能为空');
          }
+      },
+      register(){
+        this.$router.push("/register")
       }
     }
 }

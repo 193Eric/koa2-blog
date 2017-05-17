@@ -8,6 +8,7 @@ const homePage = resolve => require(['./views/home.vue'], resolve)
 const blog = resolve => require(['./views/blog.vue'], resolve)
 const login = resolve => require(['./views/login.vue'], resolve)
 const index = resolve => require(['./views/index.vue'], resolve)
+const register = resolve => require(['./views/register.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,10 @@ export default new Router({
     {
       path: '/login',
       component: login
+    },
+    {
+      path: '/register',
+      component: register
     },
     {
       path: '/', redirect: '/login'
