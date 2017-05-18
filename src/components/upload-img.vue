@@ -3,10 +3,8 @@
   	   <div class='finish_room2'>
        	   <div v-for='(item ,index ) in imgs' class='room_img'>
        	   	  <img :src="item">
-       	   	  <span @click='delete_img(index)'></span>
        	   </div>
-           <div class='room_add_img'>
-           	    <span></span>
+           <div class='room_add_btn'>
            	    <span>上传图片</span>
            	    <input @change='add_img'  type="file">
            </div>
@@ -15,9 +13,7 @@
 		   </p>
        </div>
   </div>
-
 </template>
-
 <script >
 	module.exports={
           data:function(){
@@ -28,9 +24,6 @@
           },
           props:{},
           methods:{
-          	  delete_img(item){
-              	this.imgs.splice(item,1);
-		 	  },
 		 	  add_img(event){
 		 	  	var reader =new FileReader();
 		 	  	var img1=event.target.files[0];
@@ -53,10 +46,9 @@
 </script>
 <style scoped >
 	 .finish_room{
-		  width: 430px;
+		  width: auto;
 		  height: auto;
 	}
-
      .finish_room2{
    	 width: 100%;
    	 height: auto;
@@ -66,7 +58,6 @@
    	 align-items: center;
    	  border-bottom: 2px solid #e1e1e1;
    }
-    
    .finish_room2 .room_img{
    	 width: 150px;
    	 height: 100px;
@@ -75,7 +66,6 @@
    	 overflow: hidden;
    }
    .finish_room2 .room_img img{
-   	 
    	 width: 100%;
    	 height: 100%;
    }
@@ -86,30 +76,18 @@
    	  right: 5px;
    	  bottom:3px;
    }
- 
-
-
-   .room_add_img{
-   	 width: 148px;
-   	 height: 98px;
-   	 border:1px solid #e1e1e1;
-   	 display: flex;
-   	 flex-direction: column;
-   	 align-items: center;
-   	 justify-content: space-between;
-   	 position: relative;
+   .room_add_btn{
+   	width: 80px;
+	height: 40px;
+	border: 1px solid #e1e1e1;
+	position: relative;
+	line-height: 40px;
+	text-align: center;
+	background: #00a6c6;
+	color: #fff;
+	border-radius: 4px;
    }
-   .room_add_img >span:nth-child(1){
-   	 margin-top: 20px;
-   	 width: 40px;
-   	 height: 40px;
-   	 overflow: hidden;
-   }
-   .room_add_img >span:nth-child(2){
-   	  margin-bottom: 10px;
-   }
-
-  .room_add_img input{
+  .room_add_btn input{
   	  position: absolute;
   	  top: 0px;
   	  left: 0px;
