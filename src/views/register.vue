@@ -36,7 +36,7 @@
                           that.$router.push("/login")
                       },500)
                     }else{
-                      that.$message.error("注册失败！")
+                      that.$message.error(res.data.ms)
                     }
                 })
           
