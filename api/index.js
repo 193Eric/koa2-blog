@@ -82,6 +82,13 @@ app.post('/register', function (req, res) {
     }
   })
 })
+app.post('/get_msg',function(req,res){
+    var blogNum;
+    sql.query('select * from blog '), function (err, rows){
+      blogNum = rows.length;
+    }
+    
+})
 app.post('/send_img', function (req, res) {
   var imgData = req.body.img
   // 过滤data:URL
