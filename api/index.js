@@ -82,12 +82,44 @@ app.post('/register', function (req, res) {
     }
   })
 })
-app.post('/get_msg',function(req,res){
-    var blogNum;
-    sql.query('select * from blog '), function (err, rows){
-      blogNum = rows.length;
+app.post('/get_msg', function (req, res) {
+  var blogNum = 0
+  var allComment = 0
+  var visitNum = 0
+  var leaveword = 0
+  var totalVisit = 0
+  var todayVisit = 0
+  // 获取当日0点的时间戳
+  var start = new Date()
+  start.setHours(0)
+  start.setMinutes(0)
+  start.setSeconds(0)
+  start.setMilliseconds(0)
+  var todayStartTime = Date.parse(start)
+  var todayEndTime = todayStartTime + 86400000
+  var nowTime = new Date().getTime()
+  sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
+    blogNum = rows.length
+    for (var i = 0,len = rows.length;i < len;i++) {
+      allComment = rows[i].comment? allComment - 0 + rows[i].comment :0;
     }
-    
+    sql.query('select visitNum from person  where user = "' + req.body.id + '"', function (err, rows) {
+      totalVisit = rows[0].visitNum;
+      sql.query('select * from leaveword ', function (err, rows) {
+        leaveword = rows.length
+        sql.query('select * from visit where  time <"' + todayEndTime + '"and time>"' + todayStartTime + '"', function (err, rows) {
+          todayVisit = rows.length
+          res.send({
+            blogNum: blogNum,
+            allComment: allComment,
+            totalVisit: totalVisit,
+            leaveword: leaveword,
+            todayVisit: todayVisit
+          })
+        })
+      })
+    })
+  })
 })
 app.post('/send_img', function (req, res) {
   var imgData = req.body.img
@@ -99,7 +131,7 @@ app.post('/send_img', function (req, res) {
     if (err) {
       res.send(err)
     } else {
-      res.send({ code: 1, ms: '保存成功', data: 'http://localhost:3000/upload/'+time + '.png'})
+      res.send({ code: 1, ms: '保存成功', data: 'http://localhost:3000/upload/' + time + '.png'})
     }
   })
 })

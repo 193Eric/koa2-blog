@@ -19,7 +19,7 @@
                     <el-tag :type='redomColor()' v-for='items in item.type'>{{items}}</el-tag>
                 </div>
                 <a class='remand'>
-                    赞(1)&nbsp&nbsp评论(2)
+                    赞({{item.star|notNull}})&nbsp&nbsp评论({{item.comment|notNull}})
                 </a>
             </div>
         </div>
