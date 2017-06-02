@@ -9,6 +9,7 @@ const blog = resolve => require(['./views/blog.vue'], resolve)
 const login = resolve => require(['./views/login.vue'], resolve)
 const index = resolve => require(['./views/index.vue'], resolve)
 const register = resolve => require(['./views/register.vue'], resolve)
+const Leaving = resolve => require(['./views/leaving.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -18,7 +19,8 @@ export default new Router({
       component: index,
       children: [
         {path: '/index/home',component: homePage},
-        {path: '/index/blog',component: blog}
+        {path: '/index/blog',component: blog},
+        {path: '/index/Leaving',component: Leaving}
       ]
     },
     {
