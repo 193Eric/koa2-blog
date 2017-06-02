@@ -53,7 +53,9 @@ app.post('/get_note', function (req, res) {
       for (var i = 0; i < rows.length; i++) {
         data[i] = {
           title: rows[i].name,
-          type: rows[i].type.split('-')
+          type: rows[i].type.split('-'),
+          star: rows[i].star,
+          comment: rows[i].comment
         }
       }
       res.send({code: 1,data: data})
@@ -62,7 +64,7 @@ app.post('/get_note', function (req, res) {
 })
 app.post('/update_note', function (req, res) {
   sql.query('update blog set id = ?,name= ?,type=?,text=?,md=? where id=?and name=?', [req.body.id, req.body.title, req.body.tag, req.body.html, req.body.md, req.body.id, req.body.title], function (err, result) {
-    !err?res.send({code: 1}):res.send({code: 0});
+    !err ? res.send({code: 1}) : res.send({code: 0})
   })
 })
 app.post('/delete_note', function (req, res) {
@@ -142,7 +144,7 @@ app.post('/get_msg', function (req, res) {
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
     blogNum = rows.length
     for (var i = 0,len = rows.length;i < len;i++) {
-      allComment = rows[i].comment ? allComment - 0 + rows[i].comment : 0
+      allComment = rows[i].comment ? allComment - 0 + (rows[i].comment-0) : allComment
     }
     sql.query('select visitNum from person  where user = "' + req.body.id + '"', function (err, rows) {
       totalVisit = rows[0].visitNum

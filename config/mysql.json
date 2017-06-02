@@ -2,6 +2,6 @@
     "host": "localhost",
     "user": "root",
     "password": "root",
-    "database": "blog",
+    "database": "blogsql",
     "port":"3306"
 }

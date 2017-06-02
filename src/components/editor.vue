@@ -95,6 +95,21 @@
                 }else{
                     url = add;
                 }
+                if(this.title == ''){
+                    that.$message({
+                        showClose: true,
+                        message: '输入标题',
+                        type: 'error'
+                    })
+                    return;
+                }else if(this.content == ''){
+                    that.$message({
+                        showClose: true,
+                        message: '输入内容',
+                        type: 'error'
+                    })
+                    return;
+                }
                     this.$ajax.post('http://127.0.0.1:3000/'+url+'',this.$qs.stringify({
                         id:sessionStorage.getItem('name'),
                         title : that.title,

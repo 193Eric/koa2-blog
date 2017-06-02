@@ -12,7 +12,7 @@
           <el-submenu index="/index/ohter">
             <template slot="title"><i class="el-icon-menu"></i>其他</template>
               <el-menu-item index="Leaving">留言</el-menu-item>
-              <el-menu-item index="footprint">足迹</el-menu-item>
+              <el-menu-item index="api">API文档</el-menu-item>
           </el-submenu>
         </el-menu>
 </el-col>
