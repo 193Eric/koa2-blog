@@ -39,7 +39,7 @@
             }
             //绘制竖条文字
             for(var i=1,len=5;i<=len;i++){
-                ctx.fillText(i*10,0,480-i*80);
+               i==5?ctx.fillText(i*10+'+',0,480-i*80):ctx.fillText(i*10,0,480-i*80);
             }
             //绘制横条
             ctx.strokeStyle = '#ddd';

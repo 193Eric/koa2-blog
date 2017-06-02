@@ -12,13 +12,28 @@ app.all('*', function (req, res, next) {
   res.header('X-Powered-By', ' 3.2.1')
   next()
 })
+// 获取本机ip地址
+function getIp () {
+  var os = require('os'),
+    iptable = {},
+    ifaces = os.networkInterfaces()
+  for (var dev in ifaces) {
+    ifaces[dev].forEach(function (details, alias) {
+      if ((details.family == 'IPv4') && (details.internal == false)) {
+        // iptable[dev+(alias?':'+alias:'')]=details.address
+        iptable['localIP'] = details.address
+      }
+    })
+  }
+  return iptable.localIP
+}
 // post请求需要
 app.use(bodyParser.urlencoded({ 'limit': '10000kb' }))
 app.post('/', function (req, res) {})
 // 文章接口
 app.post('/set_note', function (req, res) {
   var data = req.body
-  sql.query('insert into blog set ?', {id: data.id,name: data.title,type: data.tag,text: data.html}, function (err) {
+  sql.query('insert into blog set ?', {id: data.id,name: data.title,type: data.tag,text: data.html,md: data.md}, function (err) {
     if (err) {
       console.log(err)
       res.send({code: 0})
@@ -29,7 +44,7 @@ app.post('/set_note', function (req, res) {
   })
 })
 app.post('/get_note', function (req, res) {
-  sql.query('select * from blog', function (err, rows) {
+  sql.query('select * from blog where id = "' + req.body.id + '"', function (err, rows) {
     if (err) {
       console.log(err)
       res.send({code: 0})
@@ -45,9 +60,13 @@ app.post('/get_note', function (req, res) {
     }
   })
 })
+app.post('/update_note', function (req, res) {
+  sql.query('update blog set id = ?,name= ?,type=?,text=?,md=? where id=?and name=?', [req.body.id, req.body.title, req.body.tag, req.body.html, req.body.md, req.body.id, req.body.title], function (err, result) {
+    !err?res.send({code: 1}):res.send({code: 0});
+  })
+})
 app.post('/delete_note', function (req, res) {
-  var name = req.body.name
-  sql.query('delete from blog where name=' + name, function (err, rows) {
+  sql.query('delete from blog where name="' + req.body.name + '"and id = "' + req.body.id + '"', function (err, rows) {
     if (err) {
       console.log(err)
       res.send({code: 0})
@@ -82,6 +101,28 @@ app.post('/register', function (req, res) {
     }
   })
 })
+// 根据ip获取文章信息
+app.post('/get_detail_blog', function (req, res) {
+  sql.query('select * from blog where name="' + req.body.name + '"and id = "' + req.body.id + '"', function (err, rows) {
+    var blog = rows[0]
+    res.send({
+      code: 0,
+      blog: blog.text
+    })
+  })
+})
+app.post('/get_md_blog', function (req, res) {
+  sql.query('select * from blog where name="' + req.body.name + '"and id = "' + req.body.id + '"', function (err, rows) {
+    var blog = rows[0]
+    res.send({
+      code: 0,
+      blog: blog.md,
+      type: blog.type,
+      title: blog.name
+    })
+  })
+})
+// 获取首页信息接口
 app.post('/get_msg', function (req, res) {
   var blogNum = 0
   var allComment = 0
@@ -101,10 +142,10 @@ app.post('/get_msg', function (req, res) {
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
     blogNum = rows.length
     for (var i = 0,len = rows.length;i < len;i++) {
-      allComment = rows[i].comment? allComment - 0 + rows[i].comment :0;
+      allComment = rows[i].comment ? allComment - 0 + rows[i].comment : 0
     }
     sql.query('select visitNum from person  where user = "' + req.body.id + '"', function (err, rows) {
-      totalVisit = rows[0].visitNum;
+      totalVisit = rows[0].visitNum
       sql.query('select * from leaveword ', function (err, rows) {
         leaveword = rows.length
         sql.query('select * from visit where  time <"' + todayEndTime + '"and time>"' + todayStartTime + '"', function (err, rows) {
@@ -121,6 +162,7 @@ app.post('/get_msg', function (req, res) {
     })
   })
 })
+// 上传图片接口
 app.post('/send_img', function (req, res) {
   var imgData = req.body.img
   // 过滤data:URL
@@ -131,7 +173,7 @@ app.post('/send_img', function (req, res) {
     if (err) {
       res.send(err)
     } else {
-      res.send({ code: 1, ms: '保存成功', data: 'http://localhost:3000/upload/' + time + '.png'})
+      res.send({ code: 1, ms: '保存成功', data: 'http://' + getIp() + ':3000/upload/' + time + '.png'})
     }
   })
 })

@@ -9,7 +9,7 @@
             </el-dialog>
             <div class='card' v-for = "item in noteData">
                 <div class='manager'>
-                    <el-button type="primary" size="mini" icon="edit"></el-button>
+                    <el-button type="primary" size="mini" icon="edit" @click="modify(item.title)"></el-button>
                     <el-button type="primary" size="mini" @click="readyDelete(item.title)" icon="delete"></el-button>
                 </div>
                 <div class='card-title'>
@@ -44,7 +44,9 @@
     methods: {
         getList(){
             var that = this;
-            this.$ajax.post('http://127.0.0.1:3000/get_note').then(res=>{
+            this.$ajax.post('http://127.0.0.1:3000/get_note', this.$qs.stringify({
+                id :  sessionStorage.getItem('name')
+            })).then(res=>{
                     var  res = that.$qs.parse(res).data;
                     if(res.code!=0){
                         that.noteData = res.data;
@@ -65,7 +67,8 @@
             var that = this;
             this.dialogVisible = false;
             this.$ajax.post('http://127.0.0.1:3000/delete_note',this.$qs.stringify({
-                    name:that.nowName
+                    name:that.nowName,
+                    id: sessionStorage.getItem('name')
                 })).then(res=>{
                     if(res.code!=0){
                         that.$message({
@@ -83,6 +86,11 @@
                     }
                     that.nowName = '';
                 })
+        },
+        modify(name){
+            this.$help.$emit("modify",{
+                name:name,
+            });
         }
     }
   };

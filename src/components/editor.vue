@@ -9,11 +9,11 @@
                     <el-tag :closable="true" type="primary" :key="index" @close="handleClose(index)" >{{index}}</el-tag>
                 </template>
             </div>
+            <uploadImg></uploadImg>
         </div>
         <div class='btn-box'>
             <el-button type="primary" size="large" @click='save'>保存</el-button>
         </div>
-        <uploadImg></uploadImg>
     </div>
 </template>
 
@@ -34,13 +34,34 @@
                 title:"",
                 tagName:'',
                 tagBox:[],
-                src:''
+                src:'',
+                modify:false
             }
         },
         computed: {
             simplemde () {
-            return this.$refs.markdownEditor.simplemde
+                return this.$refs.markdownEditor.simplemde
             }
+        },
+        mounted(){
+            var that = this;
+            this.$help.$on("get_md",function(req){
+                this.$ajax.post('http://127.0.0.1:3000/get_md_blog', this.$qs.stringify({
+                    id: sessionStorage.getItem('name'),
+                    name:req.name
+                })).then(res =>{
+                    that.content = res.data.blog;
+                    that.title = res.data.title;
+                    that.tagBox = res.data.type!=''?res.data.type.split('-'):[];
+                    that.modify = true;
+                })
+            })
+            this.$help.$on("new",function(){
+                that.content = ''
+                that.title = ''
+                that.tagBox = [];
+                that.modify = false;
+            })
         },
         components: {
             markdownEditor,
@@ -55,7 +76,6 @@
             addTag(){
                 this.tagName!=''?this.tagBox.push(this.tagName):0;
                 this.tagName = '';
-
             },
             handleClose(index) {
                  this.tagBox.splice(this.tagBox.indexOf(index), 1);
@@ -67,36 +87,46 @@
             },
             save(){
                 var that = this;
-                this.$ajax.post('http://127.0.0.1:3000/set_note',this.$qs.stringify({
-                    id:sessionStorage.getItem('name'),
-                    title : that.title,
-                    html : that.getHtml(),
-                    tag : that.tagBox.join('-')
-                })).then(res=>{
-                    if(res.code!=0){
-                        that.$message({
-                            showClose: true,
-                            message: '保存成功',
-                            type: 'success'
-                        })
-                    }else{
-                        that.$message({
-                            showClose: true,
-                            message: '提交失败',
-                            type: 'error'
-                        })
-                    }
-                    that.title = '';
-                    that.tagBox = [];
-                    that.content = '';
-                })
+                var update = "update_note";
+                var add = 'set_note';
+                var url;
+                if(this.modify){
+                    url = update;
+                }else{
+                    url = add;
+                }
+                    this.$ajax.post('http://127.0.0.1:3000/'+url+'',this.$qs.stringify({
+                        id:sessionStorage.getItem('name'),
+                        title : that.title,
+                        html : that.getHtml(),
+                        md:that.content,
+                        tag : that.tagBox.join('-')
+                    })).then(res=>{
+                        if(res.code!=0){
+                            that.$message({
+                                showClose: true,
+                                message: '保存成功',
+                                type: 'success'
+                            })
+                        }else{
+                            that.$message({
+                                showClose: true,
+                                message: '提交失败',
+                                type: 'error'
+                            })
+                        }
+                        that.title = '';
+                        that.tagBox = [];
+                        that.content = '';
+                    })
+                
             }
         }
     }
 </script>
 <style>
     .btn-box{
-        wdith:100%;
+        width:100%;
         margin-top:20px;
         text-align:center;
     }

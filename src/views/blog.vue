@@ -25,10 +25,21 @@
         managerBlog,
         editor
     },
+    mounted(){
+        var that = this;
+        this.$help.$on('modify',function(req){
+            that.activeName = 'second';
+            that.$help.$emit('get_md',{
+                name:req.name
+            })
+        })
+    },
     methods: {
       handleClick(tab, event) {
         if(tab.name=='first'){
             this.$help.$emit('getlist');
+        }else if(tab.name == 'second'){
+            this.$help.$emit('new')
         }
       }
     }

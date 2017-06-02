@@ -10,7 +10,6 @@
             </el-button>
             <ul class='meau' v-show='meauShow'>
                 <li>修改资料</l>
-                <li>修改密码</li>
                 <li @click='quit()'>退出</li>
             </ul>
           </el-col>
