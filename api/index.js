@@ -179,6 +179,20 @@ app.post('/send_img', function (req, res) {
     }
   })
 })
+//获取留言接口
+app.post('/get_leaveword',function(req,res){
+  var id = req.body.id;
+  sql.query('select * from leaveword  where id = ?',[id], function (err, rows) {
+      if(err){
+        res.send(err)
+      }else{
+        res.send({
+          code:1,
+          data:rows
+        })
+      }
+  })
+})
 app.use(express.static(__dirname + '/images'))
 var server = app.listen(3000, function () {
   var port = server.address().port

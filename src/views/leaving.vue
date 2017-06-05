@@ -1,19 +1,35 @@
 <template>
    <div>
        <div class="main">
-            <div class="leaving-item" v-for="item in 6">
+            <div class="leaving-item" v-for="item in data">
                 <div class="left">
-                    <div class="name"><i class="el-icon-message"></i>用户名</div>
-                    <p>南京南京快女开发不具备的纪宝成教授本次</p>
+                    <div class="name"><i class="el-icon-message"></i>{{item.name}}</div>
+                    <p>{{item.text}}</p>
                 </div>
                 <div class="right"> 
-                    <span>2017-5-10 10:00</span>
+                    <span>{{item.time}}</span>
                     <el-button type="primary" size="mini" @click="readyDelete()" icon="delete"></el-button>
                 </div>
             </div>
        </div>
    </div>
 </template>
+<script>
+    export default{
+        data(){
+            return {
+                data:''
+            }
+        },
+        created(){
+            this.$ajax.post('http://127.0.0.1:3000/get_leaveword', this.$qs.stringify({
+                id: sessionStorage.getItem('name'),
+            })).then(res => {
+                that.data = res.data;
+            })
+        }
+    }
+</script>
 <style lang='less' scoped>
     .main{
         padding: 30px;
