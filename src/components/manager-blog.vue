@@ -102,9 +102,10 @@
 }
 .blog-content{
     width:100%;
+    min-height: 580px;
     .card{
         position:relative;
-        wdith:100%;;
+        wdith:100%;
         margin:20px 20px;
         height:70px;
         border-bottom:1px solid #d1dbe5;

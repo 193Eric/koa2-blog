@@ -63,7 +63,10 @@
             var that = this;
             var x=0,y=0,X=0,Y=0;
             this.ctx.beginPath();
-            var initArrX = [30,50,80,120,200,240,300,480,680,880];
+            var initArrX =[];
+            for(var i=1,len=30;i<=len;i++){
+                initArrX.push(31*i);
+            }
             var initArrY = [480,470,400,300,350,420,210,240,400,420];
             var step = 0; 
             var num = 1;

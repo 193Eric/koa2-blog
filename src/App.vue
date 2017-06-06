@@ -33,7 +33,7 @@ export default {
 body,html{
   margin:0;
   height:100%;
-  width:100%;
+  min-width: 1400px;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

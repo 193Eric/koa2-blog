@@ -144,7 +144,7 @@ app.post('/get_msg', function (req, res) {
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
     blogNum = rows.length
     for (var i = 0,len = rows.length;i < len;i++) {
-      allComment = rows[i].comment ? allComment - 0 + (rows[i].comment-0) : allComment
+      allComment = rows[i].comment ? allComment - 0 + (rows[i].comment - 0) : allComment
     }
     sql.query('select visitNum from person  where user = "' + req.body.id + '"', function (err, rows) {
       totalVisit = rows[0].visitNum
@@ -179,20 +179,47 @@ app.post('/send_img', function (req, res) {
     }
   })
 })
-//获取留言接口
-app.post('/get_leaveword',function(req,res){
-  var id = req.body.id;
-  sql.query('select * from leaveword  where id = ?',[id], function (err, rows) {
-      if(err){
-        res.send(err)
-      }else{
-        res.send({
-          code:1,
-          data:rows
-        })
-      }
+// 获取留言接口
+app.post('/get_leaveword', function (req, res) {
+  var id = req.body.id
+  sql.query('select * from leaveword  where id = ?', [id], function (err, rows) {
+    if (err) {
+      res.send(err)
+    }else {
+      res.send({
+        code: 1,
+        data: rows
+      })
+    }
   })
 })
+// 添加留言接口
+app.post('/add_leaveword', function (req, res) {
+  var data = req.body
+  sql.query('insert into leaveword set ?', { id: data.id, name: data.name, time: data.time, text: data.text}, function (err) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '添加成功'})
+  })
+})
+// 删除留言接口
+app.post('/delete_leaveword', function (req, res) {
+  var data = req.body
+  sql.query('delete from leaveword where id=? and name = ?', [data.id, data.name], function (err) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '删除成功'})
+  })
+})
+// 获取所有blog接口
+app.post('/get_all_blog', function () {
+  sql.query('select * from blog where id=?', [data.id], function (err, rows) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
+  })
+})
+// 获取blog评论接口
+app.post('get_blog_comment', function () {
+  sql.query('select * from comment where id=?', [data.id], function (err, rows) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
+  })
+})
+
 app.use(express.static(__dirname + '/images'))
 var server = app.listen(3000, function () {
   var port = server.address().port
