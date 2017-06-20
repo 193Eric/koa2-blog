@@ -38,6 +38,9 @@ export default {
     })).then(res => {
       that.data = res.data;
     })
+    this.$ajax.post('http://127.0.0.1:3000/add_blog_comment', this.$qs.stringify({ id: '193Eric', title: 'likai',text:'dsasad' })).then(res => {
+      that.data = res.data;
+    })
   },
   mounted() {
 

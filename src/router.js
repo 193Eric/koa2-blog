@@ -10,6 +10,7 @@ const login = resolve => require(['./views/login.vue'], resolve)
 const index = resolve => require(['./views/index.vue'], resolve)
 const register = resolve => require(['./views/register.vue'], resolve)
 const Leaving = resolve => require(['./views/leaving.vue'], resolve)
+const api = resolve => require(['./views/api-detail.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -20,7 +21,8 @@ export default new Router({
       children: [
         {path: '/index/home',component: homePage},
         {path: '/index/blog',component: blog},
-        {path: '/index/Leaving',component: Leaving}
+        {path: '/index/Leaving',component: Leaving},
+		{path: '/index/api',component: api}
       ]
     },
     {

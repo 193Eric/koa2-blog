@@ -103,7 +103,7 @@ app.post('/register', function (req, res) {
     }
   })
 })
-// 根据ip获取文章信息
+// 根据id获取文章信息
 app.post('/get_detail_blog', function (req, res) {
   sql.query('select * from blog where name="' + req.body.name + '"and id = "' + req.body.id + '"', function (err, rows) {
     var blog = rows[0]
@@ -179,6 +179,10 @@ app.post('/send_img', function (req, res) {
     }
   })
 })
+//获取当前服务器ip
+app.post('/get_address',function(req,res){
+	res.send(getIp()+':3000');
+})
 // 获取留言接口
 app.post('/get_leaveword', function (req, res) {
   var id = req.body.id
@@ -208,18 +212,58 @@ app.post('/delete_leaveword', function (req, res) {
   })
 })
 // 获取所有blog接口
-app.post('/get_all_blog', function () {
-  sql.query('select * from blog where id=?', [data.id], function (err, rows) {
-    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
+app.post('/get_all_blog', function (req, res) {
+  sql.query('select * from blog where id=?', [req.body.id], function (err, rows) {
+    var data = []
+    for (var i = 0,len = rows.length;i < len;i++) {
+      data.push({
+        title: rows[i].name,
+        type: rows[i].type,
+        comment: rows[i].comment,
+        star: rows[i].star
+      })
+    }
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: data})
+  })
+  var num
+  sql.query('insert into visit set ?', {name: req.body.id,time: new Date().getTime()}, function (err, rows) {})
+  sql.query('select visitNum from person where user = ?', [req.body.id], function (err, rows) {
+    num = rows[0].visitNum != null ? rows[0].visitNum - 0 + 1 : 1
+    sql.query('update person set visitNum = ? where user = ?', [num, req.body.id], function (err, rows) {
+      console.log(err)
+    })
   })
 })
 // 获取blog评论接口
-app.post('get_blog_comment', function () {
-  sql.query('select * from comment where id=?', [data.id], function (err, rows) {
+app.post('/get_blog_comment', function (req, res) {
+  sql.query('select * from comment where id=? and name=?', [req.body.id, req.body.title], function (err, rows) {
     err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
   })
 })
-
+// 添加blog评论接口
+app.post('/add_blog_comment', function (req, res) {
+  sql.query('insert into comment set?', {id: req.body.id,name: req.body.title,text: req.body.text}, function (err, rows) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
+  })
+  var num
+  sql.query('select comment from blog where id = ? and name = ?', [req.body.id, req.body.title], function (err, rows) {
+    num = rows[0].comment != null ? rows[0].comment - 0 + 1 : 1
+    sql.query('update blog set comment = ? where id = ?', [num, req.body.id], function (err, rows) {})
+  })
+})
+// 添加star接口
+app.post('/add_blog_star', function (req, res) {
+  var num
+  sql.query('select star from blog where id = ? and name = ?', [req.body.id, req.body.title], function (err, rows) {
+    num = rows[0].star != null ? rows[0].star - 0 + 1 : 1
+    sql.query('update blog set star = ? where id = ?', [num, req.body.id], function (err, rows) {
+      res.send({
+        code: 1,
+        ms: 'star成功'
+      })
+    })
+  })
+})
 app.use(express.static(__dirname + '/images'))
 var server = app.listen(3000, function () {
   var port = server.address().port
