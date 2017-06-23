@@ -141,6 +141,9 @@ app.post('/get_msg', function (req, res) {
   var todayStartTime = Date.parse(start)
   var todayEndTime = todayStartTime + 86400000
   var nowTime = new Date().getTime()
+  sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows){
+	  
+  })
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
     blogNum = rows.length
     for (var i = 0,len = rows.length;i < len;i++) {
