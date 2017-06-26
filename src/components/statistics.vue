@@ -12,14 +12,24 @@
     data () {
         return {
             canvas:'',
-            ctx:''
+            ctx:'',
+            arr_length:0,
+            arr_y:'',
         }
     },
     mounted(){
         this.canvas = document.getElementById("canvas");
         this.ctx = canvas.getContext("2d");
-        this.initDraw();
-        this.DrawRun();
+        var that = this;
+        this.$help.$on('statis',function(req){
+            that.arr_y = req.arr;
+            that.arr_length = req.arr.length;
+            for(var i =0,len=req.arr.length;i<len;i++){
+                that.arr_y[i] = 480 - that.arr_y[i]*10;
+            }
+            that.initDraw();
+            that.DrawRun();
+        })
     },
     methods:{
         initDraw(){
@@ -60,47 +70,21 @@
             ctx.stroke();
         },
         DrawRun(){
-            var that = this;
             var x=0,y=0,X=0,Y=0;
             this.ctx.beginPath();
             var initArrX =[];
-            for(var i=1,len=30;i<=len;i++){
-                initArrX.push(31*i);
+            for(var i=1,len=this.arr_length;i<=len;i++){
+                initArrX.push(30.4*(i+1));
             }
-            var initArrY = [480,470,400,300,350,420,210,240,400,420];
-            var step = 0; 
-            var num = 1;
-            var draw = ()=>{
-                drawLine();
-                if(num==15){
-                    num = 0;
-                    step++;
-                    if(step==initArrX.length){
-                        that.ctx.scale(0.2,0.2);
-                        window.cancelAnimationFrame(draw)
-                        return;
-                    }
-                }else{
-                    num++;
-                }
-                that.DrawImg(X,Y,X+x,y,'#00a6c6');
-                X = X+x;
-                Y = y;
-                window.requestAnimationFrame(draw)
+            var initArrY = this.arr_y;
+            
+            for(var i =1,len=this.arr_y.length;i<len;i++){
+                 this.DrawImg(initArrX[i-1],initArrY[i-1],initArrX[i],initArrY[i],'#00a6c6');
             }
-            var drawLine = ()=>{
-                x = (initArrX[step+1]-initArrX[step])/15;
-                y = (X - initArrX[step])/(initArrX[step+1]-initArrX[step])*(initArrY[step+1]-initArrY[step])+initArrY[step];
-            }
-            drawLine();
-            X = 30+x;
-            Y = 480;
-            window.requestAnimationFrame(draw)
         }
     }
+  }
 
-
-  };
 </script>
 <style lang='less'>
     canvas{

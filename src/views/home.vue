@@ -32,18 +32,16 @@ export default {
     }
   },
   created() {
-    var that = this;
-    this.$ajax.post('http://127.0.0.1:3000/get_msg', this.$qs.stringify({
+    
+  },
+  mounted() {
+    var that =this;
+   this.$ajax.post('http://127.0.0.1:3000/get_msg', this.$qs.stringify({
       id: sessionStorage.getItem('name'),
     })).then(res => {
       that.data = res.data;
+      that.$help.$emit('statis',{'arr':res.data.visit_arr});
     })
-    this.$ajax.post('http://127.0.0.1:3000/add_blog_comment', this.$qs.stringify({ id: '193Eric', title: 'likai',text:'dsasad' })).then(res => {
-      that.data = res.data;
-    })
-  },
-  mounted() {
-
   },
   components: {
     statistics

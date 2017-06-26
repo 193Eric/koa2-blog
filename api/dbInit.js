@@ -1,5 +1,5 @@
 var sql = require('./connect')
-const NAME = '193Eric'
+const NAME = 'root'
 const PASSWORD = '123456'
 var dbInit = function () {
   sql.connect(function (err) {

@@ -27,6 +27,12 @@ function getIp () {
   }
   return iptable.localIP
 }
+// 获取当月的天数
+function getDaysInOneMonth (year, month) {
+  month = parseInt(month, 10)
+  var d = new Date(year, month, 0)
+  return d.getDate()
+}
 // post请求需要
 app.use(bodyParser.urlencoded({ 'limit': '10000kb' }))
 app.post('/', function (req, res) {})
@@ -124,6 +130,7 @@ app.post('/get_md_blog', function (req, res) {
     })
   })
 })
+
 // 获取首页信息接口
 app.post('/get_msg', function (req, res) {
   var blogNum = 0
@@ -132,17 +139,31 @@ app.post('/get_msg', function (req, res) {
   var leaveword = 0
   var totalVisit = 0
   var todayVisit = 0
+  var visit_arr = []
   // 获取当日0点的时间戳
   var start = new Date()
   start.setHours(0)
   start.setMinutes(0)
   start.setSeconds(0)
   start.setMilliseconds(0)
-  var todayStartTime = Date.parse(start)
-  var todayEndTime = todayStartTime + 86400000
+  var todayStartTime = Date.parse(start) / 1000
+  var todayEndTime = Date.parse(start) / 1000 + 86400
   var nowTime = new Date().getTime()
-  sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows){
-	  
+  var today_one = new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/01'
+  var mouth_num = getDaysInOneMonth(new Date().getFullYear(), new Date().getMonth() + 1)
+  sql.query('select * from visit  where name = "' + req.body.id + '"', function (err, rows) {
+    var time = new Date(today_one).getTime() / 1000
+    var time_value = 86400
+    for (var j = 0,jlen = mouth_num;j < jlen;j++) {
+      var time_num = 0
+      for (var i = 0,len = rows.length;i < len;i++) {
+        if (rows[i].time >= (time + time_value - 86400) && rows[i].time <= (time + time_value)) {
+          time_num++
+        }
+      }
+      time_value += 86400
+      visit_arr.push(time_num)
+    }
   })
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
     blogNum = rows.length
@@ -153,14 +174,15 @@ app.post('/get_msg', function (req, res) {
       totalVisit = rows[0].visitNum
       sql.query('select * from leaveword ', function (err, rows) {
         leaveword = rows.length
-        sql.query('select * from visit where  time <"' + todayEndTime + '"and time>"' + todayStartTime + '"', function (err, rows) {
+        sql.query('select * from visit where  time <"' + todayEndTime + '"and time>"' + todayStartTime + '" and name = "'+req.body.id+'"', function (err, rows) {
           todayVisit = rows.length
           res.send({
             blogNum: blogNum,
             allComment: allComment,
             totalVisit: totalVisit,
             leaveword: leaveword,
-            todayVisit: todayVisit
+            todayVisit: todayVisit,
+            visit_arr: visit_arr
           })
         })
       })
@@ -182,9 +204,9 @@ app.post('/send_img', function (req, res) {
     }
   })
 })
-//获取当前服务器ip
-app.post('/get_address',function(req,res){
-	res.send(getIp()+':3000');
+// 获取当前服务器ip
+app.post('/get_address', function (req, res) {
+  res.send(getIp() + ':3000')
 })
 // 获取留言接口
 app.post('/get_leaveword', function (req, res) {
@@ -229,7 +251,19 @@ app.post('/get_all_blog', function (req, res) {
     err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: data})
   })
   var num
-  sql.query('insert into visit set ?', {name: req.body.id,time: new Date().getTime()}, function (err, rows) {})
+  sql.query('insert into visit set ?', {name: req.body.id,time: new Date().getTime() / 1000}, function (err, rows) {})
+  sql.query('select visitNum from person where user = ?', [req.body.id], function (err, rows) {
+    num = rows[0].visitNum != null ? rows[0].visitNum - 0 + 1 : 1
+    sql.query('update person set visitNum = ? where user = ?', [num, req.body.id], function (err, rows) {
+      console.log(err)
+    })
+  })
+})
+// 添加访问量接口
+app.post('/user_visit', function (req, res) {
+  sql.query('insert into visit set ?', {name: req.body.id,time: new Date().getTime() / 1000}, function (err, rows) {
+    err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '添加成功'})
+  })
   sql.query('select visitNum from person where user = ?', [req.body.id], function (err, rows) {
     num = rows[0].visitNum != null ? rows[0].visitNum - 0 + 1 : 1
     sql.query('update person set visitNum = ? where user = ?', [num, req.body.id], function (err, rows) {

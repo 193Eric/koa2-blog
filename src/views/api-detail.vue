@@ -9,6 +9,7 @@
         <p>添加留言接口：/add_leaveword { id: '用户名', name: '留言人', time: '留言时间', text: '内容'}</p>
         <p>添加评论接口：/add_blog_comment {id：'用户名',title:'博客名',text:'内容'}</p>
         <p>添加star接口：/add_blog_star {id：'用户名',title:'博客名'}</p>
+        <p>记录用户访问接口(每次+1)：/user_visit {id:'用户名'}</p>
   </div>
 </template>
 <script>
