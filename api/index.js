@@ -302,7 +302,11 @@ app.post('/add_blog_star', function (req, res) {
   })
 })
 app.use(express.static(__dirname + '/images'))
-var server = app.listen(3000, function () {
+app.get('/', function (req, res) {
+
+  res.sendfile(__dirname +'./../index.html')
+})
+var server = app.listen(80, function () {
   var port = server.address().port
   console.log('应用实例，访问地址为 http://localhost:', port)
 })
