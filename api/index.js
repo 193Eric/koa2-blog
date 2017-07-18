@@ -34,7 +34,7 @@ function getDaysInOneMonth (year, month) {
   return d.getDate()
 }
 // post请求需要
-app.use(bodyParser.urlencoded({ 'limit': '10000kb' }))
+
 app.post('/', function (req, res) {})
 // 文章接口
 app.post('/set_note', function (req, res) {
