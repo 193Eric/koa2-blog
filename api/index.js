@@ -166,16 +166,16 @@ app.post('/get_msg', function (req, res) {
     }
   })
   sql.query('select * from blog  where id = "' + req.body.id + '"', function (err, rows) {
-    blogNum = rows.length
+    blogNum = rows?rows.length:0;
     for (var i = 0,len = rows.length;i < len;i++) {
       allComment = rows[i].comment ? allComment - 0 + (rows[i].comment - 0) : allComment
     }
     sql.query('select visitNum from person  where user = "' + req.body.id + '"', function (err, rows) {
-      totalVisit = rows[0].visitNum
+      totalVisit = rows[0].visitNum?rows[0].visitNum:0;
       sql.query('select * from leaveword ', function (err, rows) {
-        leaveword = rows.length
+        leaveword = rows?rows.length:0;
         sql.query('select * from visit where  time <"' + todayEndTime + '"and time>"' + todayStartTime + '" and name = "'+req.body.id+'"', function (err, rows) {
-          todayVisit = rows.length
+          todayVisit = rows?rows.length:0;
           res.send({
             blogNum: blogNum,
             allComment: allComment,
