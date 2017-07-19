@@ -196,6 +196,12 @@ app.post('/send_img', function (req, res) {
   var base64Data = imgData.replace(/^data:image\/\w+;base64,/, ' ')
   var dataBuffer = new Buffer(base64Data, 'base64')
   var time = new Date().getTime()
+  if (!fs.existsSync(__dirname + '/images/')) {
+            fs.mkdirSync(__dirname + '/images/');
+  }
+  if (!fs.existsSync(__dirname + '/images/upload/')) {
+            fs.mkdirSync(__dirname + '/images/upload/');
+  }
   fs.writeFile(__dirname + '/images/upload/' + time + '.png', dataBuffer, function (err) {
     if (err) {
       res.send(err)
