@@ -111,7 +111,7 @@ app.post('/register', function (req, res) {
 })
 // 根据id获取文章信息
 app.post('/get_detail_blog', function (req, res) {
-  sql.query('select * from blog where name="' + req.body.name + '"and id = "' + req.body.id + '"', function (err, rows) {
+  sql.query('select * from blog where blogId="' + req.body.blogId + '"and id = "' + req.body.id + '"', function (err, rows) {
     var blog = rows[0]
     res.send({
       code: 0,
@@ -248,6 +248,7 @@ app.post('/get_all_blog', function (req, res) {
     var data = []
     for (var i = 0,len = rows.length;i < len;i++) {
       data.push({
+        blogId:rows[i].blogId,
         title: rows[i].name,
         type: rows[i].type,
         comment: rows[i].comment,
@@ -279,17 +280,17 @@ app.post('/user_visit', function (req, res) {
 })
 // 获取blog评论接口
 app.post('/get_blog_comment', function (req, res) {
-  sql.query('select * from comment where id=? and name=?', [req.body.id, req.body.title], function (err, rows) {
+  sql.query('select * from comment where id=? and blogId=?', [req.body.id, req.body.blogId], function (err, rows) {
     err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
   })
 })
 // 添加blog评论接口
 app.post('/add_blog_comment', function (req, res) {
-  sql.query('insert into comment set?', {id: req.body.id,name: req.body.title,text: req.body.text}, function (err, rows) {
+  sql.query('insert into comment set?', {id: req.body.id,blogId: req.body.blogId,text: req.body.text}, function (err, rows) {
     err ? res.send({code: 0,ms: err}) : res.send({code: 1,ms: '获取成功',data: rows})
   })
   var num
-  sql.query('select comment from blog where id = ? and name = ?', [req.body.id, req.body.title], function (err, rows) {
+  sql.query('select comment from blog where id = ? and blogId = ?', [req.body.id, req.body.blogId], function (err, rows) {
     num = rows[0].comment != null ? rows[0].comment - 0 + 1 : 1
     sql.query('update blog set comment = ? where id = ?', [num, req.body.id], function (err, rows) {})
   })
@@ -297,7 +298,7 @@ app.post('/add_blog_comment', function (req, res) {
 // 添加star接口
 app.post('/add_blog_star', function (req, res) {
   var num
-  sql.query('select star from blog where id = ? and name = ?', [req.body.id, req.body.title], function (err, rows) {
+  sql.query('select star from blog where id = ? and blogId = ?', [req.body.id, req.body.blogId], function (err, rows) {
     num = rows[0].star != null ? rows[0].star - 0 + 1 : 1
     sql.query('update blog set star = ? where id = ?', [num, req.body.id], function (err, rows) {
       res.send({
