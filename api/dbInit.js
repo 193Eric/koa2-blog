@@ -1,11 +1,32 @@
-{"sub_type":"2",
-"server_type":"\u9ad8\u7ea7\u6708\u5ac2",
-"remark":"","city":"1","price":"12800","num":"26","num_type":"1",
-"json_data":{"city":"1","server_type":"\u9ad8\u7ea7\u6708\u5ac2",
-"sub_type":"2"},"remark":"","price":"12800","hid":"1",
-"num":"26","num_type":"1","sort":"3",
-"special":[{"id":"1499927313348","name":"\u6709\u7279\u6b8a\u4f20\u67d3\u75c5","remark":"\u5982\u80ba\u7ed3\u6838\uff0c\u5927\u5c0f\u4e09\u9633","rule":"1","value":"20","sort":"1"},
-{"id":"1499927337704","name":"\u9700\u8981\u5f00\u5177\u53d1\u7968","remark":"\u52a0\u65366%\u7a0e\u8d39","rule":"1","value":"6","sort":"2"},
-{"id":"1499927354300","name":"\u53cc\u80de\u80ce","remark":"\u52a0\u6536150\/\u5929","rule":"2","value":"3900","sort":"3"}],
-"logo_url":"\/Public\/uploadImg\/2017-07-19\/15004466184049.png","sort":"1","type":2,"special_group":"121,122,123",
+var sql = require('./connect')
+const NAME = 'root'
+const PASSWORD = '123456'
+var dbInit = function () {
+  sql.connect(function (err) {
+    if (err) {
+      console.log('数据库连接失败')
+    }else {
+      console.log('成功连接数据库,正在初始化数据库')
+      sql.query('CREATE TABLE person(userId smallint(6) unsigned NOT NULL auto_increment,user varchar(255),password varchar(255),name varchar(255),visitNum int(10),PRIMARY KEY (`userId`)) ENGINE=InnoDB DEFAULT CHARSET=gbk', function (err) {
+        !err ? console.log('person表创建成功') : console.log(err)
+      })
+      sql.query('CREATE TABLE blog(blogId smallint(6) unsigned NOT NULL auto_increment,id varchar(255),name varchar(255),type varchar(255),text longtext,md longtext,comment varchar(255),star int(10),PRIMARY KEY (`blogId`) ) ENGINE=InnoDB DEFAULT CHARSET=gbk', function (err) {
+        !err ? console.log('blog表创建成功') : console.log(err)
+      })
+      sql.query('CREATE TABLE comment(commentId smallint(6) unsigned NOT NULL auto_increment,id varchar(255) ,blogId varchar(255),text varchar(255),PRIMARY KEY (`commentId`)) ENGINE=InnoDB DEFAULT CHARSET=gbk', function (err) {
+        !err ? console.log('comment表创建成功') : console.log(err)
+      })
+      sql.query('insert into person set ?', {user: NAME,password: PASSWORD}, function (err) {
+        !err ? console.log('person初始化成功') : console.log(err)
+      })
+      sql.query('CREATE TABLE leaveword(lwId smallint(6) unsigned NOT NULL auto_increment,id varchar(255),name varchar(255),time int(30),text varchar(255),PRIMARY KEY(`lwId`)) ENGINE=InnoDB DEFAULT CHARSET=gbk', function (err) {
+        !err ? console.log('leaveword表创建成功') : console.log(err)
+      })
+      sql.query('CREATE TABLE visit(id smallint(6) unsigned NOT NULL auto_increment,name varchar(255),time int(100),PRIMARY KEY(`id`)) ENGINE=InnoDB DEFAULT CHARSET=gbk', function (err) {
+        !err ? console.log('visit表创建成功') : console.log(err)
+      })
+      sql.end()
+    }
+  })
 }
+dbInit()
