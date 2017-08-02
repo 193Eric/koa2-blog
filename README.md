@@ -4,7 +4,7 @@
 
 > 本项目是采用element-ui的ui组件框架，结合webpack 打包的vue单页面后台系统。API接口是用Nodejs express框架。  
 
-> 线上demo地址：http://119.29.140.135 -----用户名：root,密码：123456  
+> 线上demo地址:<http://119.29.140.135> -----用户名：root,密码：123456  
 
 > 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^  
 
@@ -69,5 +69,4 @@ API:
 #### 第二步：npm install 把项目依赖安装.  
 #### 第三步：npm run dbInit 初始化数据表.  
 #### 第四步：npm run dev 打开一个终端，运行项目.  
-#### 第五步：npm run api 另外打开一个终端，运行node API.   
-
+#### 第五步：npm run api 另外打开一个终端，运行node API.
