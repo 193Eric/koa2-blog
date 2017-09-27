@@ -84,7 +84,7 @@ app.post('/delete_note', function (req, res) {
   })
 })
 app.post('/login', function (req, res) {
-  sql.query('select user from person where user="' + req.body.username + '" and password="' + req.body.password, function (err, rows) {
+  sql.query('select user from person where user="' + req.body.username + '" and password="' + req.body.password+'"', function (err, rows) {, function (err, rows) {
     if (err || rows.length == 0) {
       console.log(err)
       res.send({code: 0})
