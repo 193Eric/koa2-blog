@@ -21,7 +21,7 @@ Vue.prototype.$message = Message
 Vue.prototype.$ajax = axios
 Vue.prototype.$qs = qs
 Vue.prototype.$help = new Vue();//用来组件之间进行通信
-
+  
 //删选器
 Vue.filter('notNull',function(value){
   if(value==null){
