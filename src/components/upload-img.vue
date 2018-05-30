@@ -6,7 +6,7 @@
            	    <input @change='add_img'  type="file">
            </div>
        </div>
-	   <p v-for='(item,index) in urlList'>
+	   <p v-for='(item,index) in urlList' :key='index'>
 		图片{{index}}  :   {{item}}<br/>
 		</p>
 		<br/>

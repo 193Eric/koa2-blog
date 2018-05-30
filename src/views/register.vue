@@ -1,12 +1,14 @@
 <template>
   <div id='register'  @keyup.enter='register'>
-    <div class="register-box"> 
+    <div class="register-box">
+      <el-card> 
         <div class="title">注册博客管理账号</div>
         <el-input v-model="username" placeholder="请输入账号" name="username"></el-input>
         <el-input v-model="password" type="password" placeholder="请输入密码" name="password"></el-input>
         <el-input v-model="re_password" type="password" placeholder="请确认密码" name="re_password"></el-input>
         <el-button @click='register'>注册</el-button>
         <el-button type="text" @click='login'>已有账号，立即登陆</el-button>
+      </el-card>
     </div>
   </div>  
 </template>
@@ -55,10 +57,12 @@
    #register{
      width:100%;
      height:100%;
-     background:#2f4d69;
+     background:url("./../assets/images/timg.jpg") no-repeat;
+     background-size: 100%;
+      opacity: .9;
    } 
    .register-box{
-      width:300px;
+      width:400px;
       margin:auto;
       text-align:center;
       position: absolute;
@@ -68,7 +72,7 @@
       right:0;
       .title{
         font-size:28px;
-        color:#ffffff;
+        color:#333;
         margin-bottom:25px;
       }
       .el-input{
@@ -85,7 +89,7 @@
         margin-top:10px;
         background-color:#619ac5;
         border:0;
-        color:#ffffff;
+        color:#333;
         box-shadow:0 0 3px #333;
         font-size:16px;
         letter-spacing: 8px;
@@ -93,7 +97,7 @@
       .el-button--text{
         margin-top:10px;
         margin-left:0;
-        color:#ffffff;
+        color:#333;
       }
 
     }

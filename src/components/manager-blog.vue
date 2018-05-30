@@ -7,7 +7,7 @@
                     <el-button type="primary" @click='deleteTitle()'>确 定</el-button>
                 </span>
             </el-dialog>
-            <div class='card' v-for = "item in noteData">
+            <div class='card' v-for = "(item,index) in noteData" :key='index'>
                 <div class='manager'>
                     <el-button type="primary" size="mini" icon="edit" @click="modify(item.title)"></el-button>
                     <el-button type="primary" size="mini" @click="readyDelete(item.title)" icon="delete"></el-button>
@@ -16,7 +16,7 @@
                     {{item.title}}
                 </div>
                 <div class='tag-box'>
-                    <el-tag :type='redomColor()' v-for='items in item.type'>{{items}}</el-tag>
+                    <el-tag :type='redomColor()' v-for='(items,index) in item.type' :key='index'>{{items}}</el-tag>
                 </div>
                 <a class='remand'>
                     赞({{item.star|notNull}})&nbsp&nbsp评论({{item.comment|notNull}})

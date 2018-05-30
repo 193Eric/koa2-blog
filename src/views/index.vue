@@ -17,7 +17,9 @@
       <el-row id='content'>
       <meau></meau>
       <el-col :span='24' class='title-content'>
-        <router-view></router-view>
+        <el-card>
+          <router-view></router-view>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -166,7 +168,8 @@ export default {
     }
     .title-content{
       background:#F9FAFC;
-      padding-left:250px;
+          padding: 20px;
+    padding-left: 270px;
       .cricle{
         text-align:center
       }

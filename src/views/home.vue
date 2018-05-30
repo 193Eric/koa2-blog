@@ -1,4 +1,4 @@
-//index.vue
+
 <template>
   <div>
     <el-col :span='24' class='banner'>

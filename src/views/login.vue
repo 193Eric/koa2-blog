@@ -1,12 +1,14 @@
 <template>
   <div id='login'  @keyup.enter='login'>
-    <div class="login-box"> 
+    <div class="login-box">
+      <el-card>
         <div class="title">个人博客管理系统</div>
         <el-input v-model="username" placeholder="请输入登陆账号" name="username"></el-input>
         <el-input v-model="password" type="password" placeholder="请输入登陆密码" name="password"></el-input>
         <el-button @click='login'>登陆</el-button>
         <el-button type="text">忘记密码</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button type="text" @click='register'>注册账号</el-button>
+      </el-card>
     </div>
   </div>  
 </template>
@@ -19,7 +21,7 @@ export default {
       }
     },
     mounted(){
-      if(sessionStorage.getItem('name')){
+      if(!sessionStorage.getItem('name')){
         this.$router.push("/index/home")
       }
     },
@@ -55,10 +57,12 @@ export default {
    #login{
      width:100%;
      height:100%;
-     background:#2f4d69;
+     background:url("./../assets/images/timg.jpg") no-repeat;
+     background-size: 100%;
+      opacity: .9;
    } 
    .login-box{
-      width:300px;
+      width:400px;
       margin:auto;
       text-align:center;
       position: absolute;
@@ -68,7 +72,7 @@ export default {
       right:0;
       .title{
         font-size:28px;
-        color:#ffffff;
+        color:#333;
         margin-bottom:25px;
       }
       .el-input{
@@ -85,7 +89,7 @@ export default {
         margin-top:10px;
         background-color:#619ac5;
         border:0;
-        color:#ffffff;
+        color:#333;
         box-shadow:0 0 3px #333;
         font-size:16px;
         letter-spacing: 8px;
@@ -93,7 +97,7 @@ export default {
       .el-button--text{
         margin-top:10px;
         margin-left:0;
-        color:#ffffff;
+        color:#333;
       }
 
     }
