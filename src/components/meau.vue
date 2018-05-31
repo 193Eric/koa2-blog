@@ -31,7 +31,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .side-meau{
-      margin-top: 50px;
+      padding-top: 50px;
 }
 .el-menu-vertical-demo{
   height: 100%;
