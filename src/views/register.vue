@@ -28,10 +28,10 @@
               if(that.password != that.re_password){
                 that.$message.error("密码校验不正确！")
               }else{
-                this.$ajax.post('http://127.0.0.1:3000/register',this.$qs.stringify({
+                this.$ajax.post('http://127.0.0.1:3000/register',{
                     username : that.username,
                     password : that.password,
-                })).then(res=>{
+                }).then(res=>{
                     if(res.data.code==1){
                       that.$message.success("注册成功");
                       setTimeout(function(){

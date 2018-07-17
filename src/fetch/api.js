@@ -8,6 +8,7 @@ const vue = new Vue();
 // axios 配置
 axios.defaults.timeout = 30000
 axios.defaults.withCredentials = true
+
 //let loadingIns={}
 const showNetworkError = msg => {
     const options = typeof msg === 'object'

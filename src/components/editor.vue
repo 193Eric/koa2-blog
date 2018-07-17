@@ -46,10 +46,10 @@
         mounted(){
             var that = this;
             this.$help.$on("get_md",function(req){
-                this.$ajax.post('http://127.0.0.1:3000/get_md_blog', this.$qs.stringify({
+                this.$ajax.post('http://127.0.0.1:3000/get_md_blog', {
                     id: sessionStorage.getItem('name'),
                     name:req.name
-                })).then(res =>{
+                }).then(res =>{
                     that.content = res.data.blog;
                     that.title = res.data.title;
                     that.tagBox = res.data.type!=''?res.data.type.split('-'):[];
@@ -110,13 +110,13 @@
                     })
                     return;
                 }
-                    this.$ajax.post('http://127.0.0.1:3000/'+url+'',this.$qs.stringify({
+                    this.$ajax.post('http://127.0.0.1:3000/'+url+'',{
                         id:sessionStorage.getItem('name'),
                         title : that.title,
                         html : that.getHtml(),
                         md:that.content,
                         tag : that.tagBox.join('-')
-                    })).then(res=>{
+                    }).then(res=>{
                         if(res.code!=0){
                             that.$message({
                                 showClose: true,

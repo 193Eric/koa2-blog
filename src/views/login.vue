@@ -3,7 +3,7 @@
     <div class="login-box">
       <el-card>
         <div class="title">个人博客管理系统</div>
-        <el-input v-model="username" placeholder="请输入登陆账号" name="username"></el-input>
+        <el-input v-model="username" type='text' placeholder="请输入登陆账号" name="username"></el-input>
         <el-input v-model="password" type="password" placeholder="请输入登陆密码" name="password"></el-input>
         <el-button @click='login'>登陆</el-button>
         <el-button type="text">忘记密码</el-button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -21,7 +21,7 @@ export default {
       }
     },
     mounted(){
-      if(!sessionStorage.getItem('name')){
+      if(sessionStorage.getItem('name')){
         this.$router.push("/index/home")
       }
     },
@@ -29,11 +29,12 @@ export default {
       login(){
          var that = this;
          if(this.username!=''&&this.password!=''){
-              this.$ajax.post('http://127.0.0.1:3000/login',this.$qs.stringify({
+              this.$ajax.post('http://127.0.0.1:3000/login',{
                     username : that.username,
                     password : that.password,
-                })).then(res=>{
-                    if(res.data.code==1){
+                }).then(res=>{
+                  alert(res.code)
+                    if(res.code === 1){
                       that.$message.success("验证通过");
                       sessionStorage.setItem('name',that.username);
                       setTimeout(function(){

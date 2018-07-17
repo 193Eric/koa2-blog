@@ -35,10 +35,10 @@ export default {
     
   },
   mounted() {
-    var that =this;
-   this.$ajax.post('http://127.0.0.1:3000/get_msg', this.$qs.stringify({
+   var that =this;
+   this.$ajax.post('http://localhost:3000/get_msg', {
       id: sessionStorage.getItem('name'),
-    })).then(res => {
+    }).then(res => {
       that.data = res.data;
       that.$help.$emit('statis',{'arr':res.data.visit_arr});
     })

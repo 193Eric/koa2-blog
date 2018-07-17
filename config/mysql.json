@@ -1,7 +1,7 @@
 {
     "host": "localhost",
     "user": "root",
-    "password": "root",
-    "database": "test",
+    "password": "Aa4321469",
+    "database": "backend",
     "port":"3306"
 }

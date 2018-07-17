@@ -42,18 +42,18 @@
             },
             getLm(){
                 var that = this;
-                this.$ajax.post('http://127.0.0.1:3000/get_leaveword', this.$qs.stringify({
+                this.$ajax.post('http://127.0.0.1:3000/get_leaveword', {
                     id: sessionStorage.getItem('name'),
-                })).then(res => {
+                }).then(res => {
                     that.data = res.data.data;
                 })
             },
             deleteLm(name){
                 var that = this;
-                this.$ajax.post('http://127.0.0.1:3000/delete_leaveword', this.$qs.stringify({
+                this.$ajax.post('http://127.0.0.1:3000/delete_leaveword',{
                     id: sessionStorage.getItem('name'),
                     name: that.nowName
-                })).then(res => {
+                }).then(res => {
                     res.data.code ==1? that.dialogVisible = false:0;
                     that.getLm();
                 })

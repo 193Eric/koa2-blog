@@ -44,9 +44,9 @@
     methods: {
         getList(){
             var that = this;
-            this.$ajax.post('http://127.0.0.1:3000/get_note', this.$qs.stringify({
+            this.$ajax.post('http://127.0.0.1:3000/get_note', {
                 id :  sessionStorage.getItem('name')
-            })).then(res=>{
+            }).then(res=>{
                     var  res = that.$qs.parse(res).data;
                     if(res.code!=0){
                         that.noteData = res.data;
@@ -66,10 +66,10 @@
         deleteTitle(){
             var that = this;
             this.dialogVisible = false;
-            this.$ajax.post('http://127.0.0.1:3000/delete_note',this.$qs.stringify({
+            this.$ajax.post('http://127.0.0.1:3000/delete_note',{
                     name:that.nowName,
                     id: sessionStorage.getItem('name')
-                })).then(res=>{
+                }).then(res=>{
                     if(res.code!=0){
                         that.$message({
                             showClose: true,
