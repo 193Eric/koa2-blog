@@ -10,7 +10,7 @@
 > 如果你觉得对你有帮助，可以点击folk，或者follow一下，我会不定时跟新一些有趣的东西.~~~ 0.0  
 
   
-## vue前端，nodejs后台api，数据库 mysql 构建的个人博客后台/
+## koa2，数据库 mongodb 构建的个人博客后台/
 ![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-114954%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
 ![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-115014%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
 ##### 环境
