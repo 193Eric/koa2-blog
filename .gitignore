@@ -1,8 +1,2 @@
 .DS_Store
 node_modules/
-config/
-dist/
-npm-debug.log
-yarn-error.log
-.vscode/
-api/images/
