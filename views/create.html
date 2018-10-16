@@ -1,0 +1,40 @@
+{% extends 'views/base.html' %}
+{% block body %}
+<form action="/posts/new" method="POST">
+    <header class="editor-header">
+        <input name="title" class="input is-shadowless is-radiusless"  autofocus="autofocus" type="text" placeholder="输入文章标题...">
+        <div class="right-box">
+            <div class="select is-small">
+                <select name="category">
+                    <option disabled="disabled">分类</option>
+                    {% for category in categories %}
+                    <option value={{category._id}}>{{category.title}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="button is-small is-primary">发布</button>
+        </div>
+    </header>
+    <div id="editor">
+        <textarea name="content" class="input" name="content"></textarea>
+        <div class="show content markdown-body"></div>
+    </div>
+</form>
+<nav class="navbar has-shadow">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            koa2-blog
+        </a>
+    </div>
+</nav>
+{% block script %}
+<script src="https://cdn.bootcss.com/marked/0.3.19/marked.min.js"></script>
+<script>
+    var input = $('#editor .input')
+    $('#editor .show').html(marked(input.val()))
+    input.on('input', function() {
+        $('#editor .show').html(marked($(this).val(), { sanitize: true }))
+    })
+</script>
+{% endblock %}
+{% endblock %}

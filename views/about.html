@@ -1,0 +1,32 @@
+{% extends 'views/base.html' %}
+{% block body %}
+{% include "views/components/header.html" %}
+
+<div class='title'>{{ title }}</div>
+<div class='about-detail'>
+    <div class='line'>
+        这是一个用koa2、mongodb 搭建的个人博客平台。
+    </div>
+    <div class='line'>
+        作者：193Eric
+    </div>
+    <div class='line'>
+       github地址：<a href="https://github.com/193Eric/koa2-blog">https://github.com/193Eric/koa2-blog</a>
+    </div>
+</div>
+
+<style>
+    .title {
+        text-align: center;
+        line-height: 100px;
+        color: #00d1b2;
+    }
+
+    .about-detail {
+        text-align: center;
+        line-height: 50px;
+
+    }
+
+</style>
+{% endblock %}
