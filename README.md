@@ -13,8 +13,6 @@
 ## vue前端，nodejs后台api，数据库 mysql 构建的个人博客后台/
 ![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-114954%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
 ![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-115014%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
-![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-115030%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
-![print](https://github.com/193Eric/koa2-blog/blob/master/public/image/WX20181016-115112%402x%E7%9A%84%E5%89%AF%E6%9C%AC%202.png) 
 ##### 环境
  1. node v6.10.1
  2. cnpm 4.5.0
