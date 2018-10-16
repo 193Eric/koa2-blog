@@ -1,4 +1,4 @@
-# vue-node-demo  
+# koa2-blog  
 
 > github地址 https://github.com/193Eric/koa2-blog
 
